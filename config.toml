@@ -78,9 +78,9 @@ enableEmoji = true
       icon_pack = "fab"
       url       = "https://github.com/DiegoRijos/"
   [[params.social]]
-      icon      = "facebook-square" # icon name without the 'fa-'
-      icon_pack = "fab"
-      url       = "https://www.facebook.com/hashtag/ap%C3%A9ro"
+      icon      = "envelope" # icon name without the 'fa-'
+      icon_pack = "fas"
+      url       = "mailto:diegorijos@hotmail.com"
 
   [[params.social]]
       icon      = "twitter" # icon name without the 'fa-'
