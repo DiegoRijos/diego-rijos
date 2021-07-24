@@ -185,7 +185,7 @@ Dentro de los puntos fuertes que han observado las calificadoras, se encuentra l
 La calificación otorgada por FitchRatings fue BBB- con perspectiva negativa, Moody’s Baa2 con perspectiva estable y por último S&P Global Ratings. Los dictamenes se pueden encontrar siguiendo los siguientes códigos QR, al igual que una nota ampliando la importancia de mantener el grado inversor y las consecuencias de su perdida.
 
 
-[](images/Calif.jpg)
+![](images/Calif.jpg)
 
 ### 2.2.3 Inflación
 
