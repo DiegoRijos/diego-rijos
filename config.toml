@@ -98,7 +98,7 @@ enableEmoji = true
 
 [menu]
   [[menu.header]]
-    name = "Sobre mi"
+    name = "Sobre el autor"
     title = "About Blogophonic"
     url = "/about/"
     weight = 1
