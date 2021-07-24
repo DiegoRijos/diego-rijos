@@ -288,15 +288,17 @@ Para este análisis he decidido enfocarme en la operativa de los últimos 10 añ
 
 Observando la siguiente tabla, podemos apreciar los montos de la operativa del mercado bursátil en Uruguay durante el período que va desde 2010 a 2020. La media de la operativa en los 3 mercados se situó en aproximadamente 36.000 millones de dólares, teniendo su máxima operativa en 2018 totalizándose aproximadamente 52.500 millones de dólares. En términos de desviación desde la media, el desvió estándar de la operativa total fue de aproximadamente de 9.000 millones de dólares. 
 
+Total Operado en el Mercado de Valores Uruguayo 2010-2020 (millones de dólares)
 ```{r Operativa mercado, echo=FALSE, fig.height=5, fig.width=8}
 a <- as.data.frame(t(Operativa))
 colnames(a) <- unique(Operativa$Year)
 a <- a[-1,]
-DT::datatable(a,
-              caption = "Total Operado en el Mercado de Valores Uruguayo 2010-2020 (cifras en millones de dólares)",
-              extensions = "Buttons",
-              options=list(dom = 'Bfrtip', buttons = c('copy', 'csv', 'excel')))
+#DT::datatable(a,
+#              caption = "Total Operado en el Mercado de Valores Uruguayo 2010-2020 (cifras en millones de dólares)",
+#              extensions = "Buttons",
+#              options=list(dom = 'Bfrtip', buttons = c('copy', 'csv', 'excel')))
 
+knitr::kable(a)
 
 ```
 Fuente: BCU
