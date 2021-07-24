@@ -338,3 +338,41 @@ op_2 <- ggplot(Op, aes(x = Year, y = Porcentaje, fill = Bolsa)) +
 ggplotly(op_2)
 
 ```
+
+Elaboración propia en base a BCU
+
+Si graficamos los montos operados respecto al tiempo, podemos observar claramente una fuerte correlación entre la operativa de BEVSA con la operativa over the counter. Como era de esperar, la operativa de la BVM se encuentra cercana al eje de las abscisas debido a su bajo volumen. Como se puede apreciar en las líneas anteriores, la operativa bursátil uruguaya tiene un volumen relativamente bajo si se compara con la región. Si analizamos por ejemplo el volumen transado por la Bolsa de Valores de Sao Paulo en 2015, esta se situó en 1.543 billones de dólares.  
+
+```{r operativa grafico, echo=FALSE, fig.height=2.6, fig.width=8}
+dygraphs::dygraph(Operativa, main = "Operativa del Mercado de Valores Uruguayo 2010-2020", xlab = "Año", ylab = "Millones de Dolares")%>% dyOptions(drawGrid = F)%>%dyLegend(width = 700)
+```
+Elaboración propia en base a BCU
+
+Si ponemos foco en la tasa de variación de la operativa, en los últimos 10 años esta tuvo un crecimiento de 63%. No obstante, ha tenido fuerte fluctuaciones durante el periodo, pasando en algunos casos por un retraimiento fuerte. Esta variación puede ser explicada por un cumulo de factores, por ejemplo, la poca profundidad del mercado, la performance de la economía uruguayo y una deficiente educación financiera que no encauza parte de los ahorros de la economía a este sector. 
+
+```{r Operativa por mercado, echo=FALSE, fig.height=5, fig.width=8}
+OP_M <- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "OP")
+OP_M$Porcentaje <- round(OP_M$Porcentaje*100,2)
+op3 <- ggplot(OP_M, aes(x = Year, y = Porcentaje, fill = Mercado)) + 
+  geom_bar(stat = "identity")+
+  scale_fill_brewer(palette = "Blues")+
+  scale_x_continuous(breaks = c(year_inicio:year_final))+
+  scale_y_continuous(breaks = seq(0,100,10))+
+  theme_classic()+
+  theme(legend.position = "bottom")+
+  labs(title="Operativa por mercado transado",
+       subtitle = "Por bolsa transada y tipo de titulo transado",
+       x="Año",
+       y="Porcentaje sobre mercado primario",
+       fill="Mercado",
+       caption = c("Elaboración propia en base a datos del BCU"))+
+  coord_flip()
+
+ggplotly(op3)
+
+
+
+```
+Elaboración propia en base a BCU
+
+Si analizamos el mercado en el que se transan los distintos tipos de activos, se puede extraer una insight relevante, la mayoría de los títulos operados se transan en el mercado primario, por lo que la estrategia dominante en el mercado es buy and hold. Como se puede apreciar en el gráfico anterior, la operativa en el mercado primario supone cerca del 65% de la operativa total del mercado en los últimos años. Por dicha razón, conviene analizar con la información disponible en la página del BCU cuales son los instrumentos y los sectores que están activos en los segmentos del mercado.
