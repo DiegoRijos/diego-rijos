@@ -28,11 +28,11 @@ enableEmoji = true
     style = "github"
     
 [params]
-  orgName = "DiegoRijos"
+  orgName = "Diego Rijos"
   orgLocal = "Montevideo, Uruguay"
   description = ""
-  favicon = "/img/favicon.ico"
-  logo = "/img/blogophonic-mark-dark.png"
+  favicon = "/img/diego_sOe_icon.ico"
+  logo = "/img/diego.png"
   mainSections = ["blog", "project", "talk"]
   navallcaps = true
   # show/hide social icons in site header & footer
@@ -98,22 +98,22 @@ enableEmoji = true
 
 [menu]
   [[menu.header]]
-    name = "About"
+    name = "Sobre mi"
     title = "About Blogophonic"
     url = "/about/"
     weight = 1
   [[menu.header]]
-    name = "Blog"
+    name = "Artículos"
     title = "Blog"
     url = "/blog/"
     weight = 2
   [[menu.header]]
-    name = "Projects"
+    name = "Proyectos"
     title = "Project Portfolio"
     url = "/project/"
     weight = 3
   [[menu.header]]
-    name = "Talks"
+    name = "Presentaciones y charlas"
     title = "Talks"
     url = "/talk/"
     weight = 4
