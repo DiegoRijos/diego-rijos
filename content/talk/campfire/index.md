@@ -1,12 +1,12 @@
 ---
 title: "¿Uruguay puede ser hub regional para la exportación de servicios?"
 subtitle: "Charla en el marco de propuestas post pandemia de la Academia Nacional de Economía"
-excerpt: "Here is a talk I gave on making awesome personal websites using Hugo, blogdown, GitHub, and Netlify."
+excerpt: "Charla en el marco de propuestas post pandemia de la Academia Nacional de Economía"
 date: 2020-08-20
 
 show_post_time: false
 
-author: "Alison Hill"
+author: "Diego Rijos"
 location: "Montevideo, Uruguay"
 draft: false
 # layout options: single, single-sidebar
