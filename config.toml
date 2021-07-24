@@ -125,7 +125,7 @@ enableEmoji = true
     url = "/license/"
     weight = 1
   [[menu.footer]]
-    name = "Contact"
+    name = "Contacto"
     title = "Contact form"
     url = "/contact/"
     weight = 2
