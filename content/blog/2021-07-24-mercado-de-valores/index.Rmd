@@ -6,7 +6,7 @@ date: 2021-07-24
 author: "Diego Rijos"
 draft: false
 # layout options: single, single-sidebar
-layout: single-sidebar
+layout: single
 categories:
 - R
 - Finanzas
