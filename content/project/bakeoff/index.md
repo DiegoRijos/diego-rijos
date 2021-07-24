@@ -23,7 +23,7 @@ links:
   url: https://github.com/apreshill/bakeoff
 ---
 
-{{< here >}}
+
 
 ![Formspree Logo](formspree-logo.png)
 
