@@ -1,9 +1,9 @@
 ---
-title: A Blog That Works
+title: Artículos recientes
 description: |
   This is a fully featured blog that supports categories, 
   tags, series, and pagination.
-author: "The R Markdown Team @RStudio"
+author: "Diego Rijos"
 show_post_thumbnail: true
 show_author_byline: true
 show_post_date: true
@@ -12,28 +12,25 @@ layout: list-sidebar # list, list-sidebar, list-grid
 
 # for list-sidebar layout
 sidebar: 
-  title: A Sidebar for Your Thoughts
+  title: "El curioso cometido de la economía es enseñar a los hombres lo poco que realmente saben sobre aquello que imaginan que pueden diseñar."
   description: |
-    This is a fully featured blog that supports categories,
-    tags, series, and pagination. Even this sidebar offers 
-    a ton of customizations.
+    F.A. Hayek
     
-    Check out the _index.md file in the /blog folder 
-    to edit this content. 
-  author: "The R Markdown Team @RStudio"
+   
+  author:
   text_link_label: Subscribe via RSS
   text_link_url: /index.xml
   show_sidebar_adunit: false # show ad container
 
 # set up common front matter for all pages inside blog/
 cascade:
-  author: "The R Markdown Team @RStudio"
+  author: "Diego Rijos"
   show_author_byline: true
   show_post_date: true
   show_disqus_comments: false # see disqusShortname in site config
   # for single-sidebar layout
   sidebar:
-    text_link_label: View recent posts
+    text_link_label: Artículos Recientes
     text_link_url: /blog/
     show_sidebar_adunit: false # show ad container
 ---
