@@ -330,7 +330,7 @@ op_2 <- ggplot(Op, aes(x = Year, y = Porcentaje, fill = Bolsa)) +
   labs(title="Operativa por bolsa transada",
        subtitle = "Por bolsa transada y tipo de titulo transado",
        x="Año",
-       y="Porcentaje sobre mercado primario",
+       y="Porcentaje sobre total operado",
        fill="Bolsa",
        caption = c("Elaboración propia en base a datos del BCU"))+
   coord_flip()
@@ -363,7 +363,7 @@ op3 <- ggplot(OP_M, aes(x = Year, y = Porcentaje, fill = Mercado)) +
   labs(title="Operativa por mercado transado",
        subtitle = "Por bolsa transada y tipo de titulo transado",
        x="Año",
-       y="Porcentaje sobre mercado primario",
+       y="Porcentaje sobre total operado",
        fill="Mercado",
        caption = c("Elaboración propia en base a datos del BCU"))+
   coord_flip()
@@ -572,7 +572,7 @@ msh <- ggplot(MSH, aes(x = Year, y = Porcentaje, fill = Titulo)) +
   labs(title="Operativa por bolsa transada",
        subtitle = "Por bolsa transada y tipo de titulo transado",
        x="Año",
-       y="Porcentaje sobre mercado primario",
+       y="Porcentaje sobre mercado secundario",
        fill="Bolsa",
        caption = c("Elaboración propia en base a datos del BCU"))+
   coord_flip()
