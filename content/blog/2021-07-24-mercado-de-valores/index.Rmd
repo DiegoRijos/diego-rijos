@@ -381,12 +381,13 @@ Si analizamos el mercado en el que se transan los distintos tipos de activos, se
 
 Analizando el comportamiento del mercado primario en Uruguay durante la última década, podemos extraer que la operativa promedio fue de aproximadamente 29.000 millones de dólares. Si analizamos como ha sido la evolución en esta década, podemos apreciar en el gráfico siguiente como la operativa del mercado primario distinguiendo títulos públicos y privados ha sido bastante similar. El crecimiento acumulado de la operativa ha sido de 43% en la ultima década. No obstante, ha tenido fuerte fluctuaciones como se puede apreciar en el gráfico.
 
-```{r Mercado primario relativo,echo=FALSE,fig.height=5, fig.width=8}
-Mer_prim_rel <- Mercado_primario
-for(i in 1:ncol(Mer_prim_rel)) {if(i>1){ Mer_prim_rel[,i ]<- round(Mer_prim_rel[ ,i]/Mer_prim_rel[,ncol(Mer_prim_rel)], 4)}}
+```{r mercado primario op  , echo=FALSE, fig.height=3, fig.width=8}
+Mercado_primario_2 <- Mercado_primario[,c(1,8,9,10) ]
 
-BVM_P<- Mer_prim_rel%>%select(Year, BVM_P)%>%mutate(Bolsa="BVM", Sector="Publico")
-colnames(BVM_P) <- c("Year", "Porcentaje", "Bolsa", "Sector")
+
+dygraphs::dygraph(Mercado_primario_2, 
+                  main = "Operativa Mercado Primario",
+                  xlab="Año",
+                  ylab = "Millones de dólares")%>%
+              dyOptions(drawGrid = F)%>%dyLegend(width = 700)
 ```
-
-
