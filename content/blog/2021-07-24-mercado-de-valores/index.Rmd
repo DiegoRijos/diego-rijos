@@ -580,6 +580,7 @@ msh <- ggplot(MSH, aes(x = Year, y = Porcentaje, fill = Titulo)) +
 ggplotly(msh)
 
 ```
+Elaboración propia en base a BCU
 
 Si nos centramos en el tipo de activo negociado, en el siguiente gráfico podremos observa la relevancia relativa de cada tipo de instrumento en el mercado secundario. El principal activo negociado ha sido históricamente instrumentos emitidos por el BCU, concretamente letras de regulación monetaria y letras de tesorería. Por otro lado, las notas en Unidades Indexadas ha sido otro instrumento relevante en el volumen transado en el mercado secundario. Por su parte la transacción de emisiones internacionales se ha retraído respecto a los valores de principio de la década.
 
@@ -627,6 +628,8 @@ ggplotly(lala, tooltip = "all")
 
 
 ```
+Elaboración propia en base a BCU
+
 
 No es de extrañarnos volúmenes tan bajos en la operativa del mercado secundario, debido a la estrategia buy and hold que tiene la mayoría de los inversores locales, por lo que rara vez se desprenden de los activos hasta su vencimiento. 
 
@@ -645,5 +648,6 @@ dygraphs::dygraph(Renta_variable,
               dyOptions(drawGrid = F)%>%dyLegend(width = 700)
 
 ```
+Elaboración propia en base a BCU
 
 
