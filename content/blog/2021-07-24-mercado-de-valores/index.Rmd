@@ -638,7 +638,7 @@ No es de extrañarnos volúmenes tan bajos en la operativa del mercado secundari
 Como pudimos extraer del análisis anterior, la mayor parte de la operativa del mercado primario y secundario, se centra en títulos de renta fija. Como se podrá recordar a mediados del siglo XX existían 45 empresas que cotizaban sus acciones en la bolsa. A fecha de este informe, las empresas que [cotizan en bolsa ascienden a 7]( https://www.bvm.com.uy/operadores/emisores-de-acciones), estando listadas todas ellas en la Bolsa de Valores de Montevideo. Si analizamos como ha sido la operativa en el mercado de renta variable en Uruguay en los últimos 10 años, nos encontramos con un panorama francamente desolador. El promedio de las transacciones en renta variable los últimos 10 años ha sido de solamente 4.5 millones de dólares, con una desviación estándar de 2.4 millones de dólares. Como se puede apreciar en el siguiente gráfico, si bien hubo un comportamiento al alza en el período analizado, estos han sido por montos realmente bajos. 
 
 
-```{r renta variable, echo=FALSE, fig.height=5, fig.width=8}
+```{r renta variable, echo=FALSE, fig.height=3, fig.width=8}
 
 Renta_variable <- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "Renta_variable")
 
@@ -655,7 +655,7 @@ Esta tendencia en la baja operativa en renta variable, ha sido una constante dur
 
 Si analizamos la constitución de fideicomisos financieros, la última década trajo aparejado un monto promedio de 210 millones de dólares de fideicomisos constituidos anualmente, con una desviación respecto a la media de 73 millones de dólares. Si observamos el gráfico, podemos ver como esta ha sido relativamente estable a partir de 2013, siguiendo la dinámica del mercado en general.
 
-```{r fideicomisos constituidos, echo=FALSE, fig.height=5, fig.width=8}
+```{r fideicomisos constituidos, echo=FALSE, fig.height=3, fig.width=8}
 
 F_financiero<- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "Fideico_financiero")
 
@@ -672,7 +672,7 @@ Elaboración propia en base a BCU
 Por último, para finalizar este análisis nos centraremos en observar cual ha sido la dinámica la dinámica en la emisión de obligaciones negociables en la última década. Como podemos observar en el siguiente gráfico, se puede apreciar una pérdida de dinamismo en la emisión de ONs en el último lustro del período analizado. Esto se debe a un retraimiento de la emisión de ONs por parte de las empresas del sector público, lo cual ha generado una retracción en los montos emitidos. 
 
 
-```{r on, echo=FALSE, fig.height=5, fig.width=8}
+```{r on, echo=FALSE, fig.height=3, fig.width=8}
 
 O_N<- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "Obl_negociables")
 
