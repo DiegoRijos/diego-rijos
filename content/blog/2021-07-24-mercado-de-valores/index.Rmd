@@ -504,4 +504,31 @@ ggplotly(lala, tooltip = "all")
 ```
 Elaboración propia en base a BCU
 
+### 3.1.2 Análisis del Mercado Secundario
+
+El mercado secundario en la última década tuvo una operativa promedio de aproximadamente 7800 millones de dólares, con una desviación estándar de aproximadamente 4300 millones de dólares. Si analizamos como ha sido la evolución de la operativa estos últimos 10 años, se puede apreciar en el gráfico siguiente que el comportamiento del mercado secundario esta fuertemente correlacionado con las transacciones de títulos públicos, siendo estos casi de la misma cuantía que la operativa total en el periodo. No obstante, es necesario recalcar que, en 2019, los valores extranjeros tuvieron un aumento considerable en la operativa del mercado secundario. 
+
+
+```{r Operativa mercado secundario, echo=FALSE,fig.width=8, fig.height=3 }
+Mercado_secundario <-read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "Mercado_secundario")
+
+
+Mercado_secundario$Publico <- Mercado_secundario$BVM_P+Mercado_secundario$BEVSA_P+Mercado_secundario$Extrabursatil_P
+Mercado_secundario$Privado <- Mercado_secundario$BVM_Pr+Mercado_secundario$BEVSA_Pr+Mercado_secundario$Extrabursatil_Pr
+Mercado_secundario$Extranjero <- Mercado_secundario$BVM_Ex+Mercado_secundario$BEVSA_Ex+Mercado_secundario$Extrabursatil_Ex
+
+Mercado_secundario$Total <- Mercado_secundario$Publico+Mercado_secundario$Privado+Mercado_secundario$Extranjero
+Mercado_sec_2 <- Mercado_secundario[,c(1,11:14)]
+
+
+dygraphs::dygraph(Mercado_sec_2, 
+                  main = "Operativa Mercado Secundario",
+                  xlab="Año",
+                  ylab = "Millones de dólares")%>%
+              dyOptions(drawGrid = F)%>%dyLegend(width = 700)
+```
+Elaboración propia en base a BCU
+
+Por otro lado, el comportamiento del mercado secundario, tiene una fuerte correlación respecto al mercado primario, dado que el comportamiento de ambos es similar. Respecto a la tasa de crecimiento durante el período, esta fue de 185% si comparamos las cifras de 2010 con la de 2020. Esta tasa se ve fuertemente influenciada por la baja operativa del mercado secundario en los primeros años del período.
+
 
