@@ -382,6 +382,17 @@ Si analizamos el mercado en el que se transan los distintos tipos de activos, se
 Analizando el comportamiento del mercado primario en Uruguay durante la última década, podemos extraer que la operativa promedio fue de aproximadamente 29.000 millones de dólares. Si analizamos como ha sido la evolución en esta década, podemos apreciar en el gráfico siguiente como la operativa del mercado primario distinguiendo títulos públicos y privados ha sido bastante similar. El crecimiento acumulado de la operativa ha sido de 43% en la ultima década. No obstante, ha tenido fuerte fluctuaciones como se puede apreciar en el gráfico.
 
 ```{r mercado primario op  , echo=FALSE, fig.height=3, fig.width=8}
+
+Mercado_primario$Publico <- Mercado_primario$BVM_P+Mercado_primario$BEVSA_P+Mercado_primario$Extrabursatil_P
+Mercado_primario$Privado <- Mercado_primario$BVM_Pr+Mercado_primario$BEVSA_Pr+Mercado_primario$Extrabursatil_Pr
+Mercado_primario$Total <- Mercado_primario$Publico+Mercado_primario$Privado
+
+a <- as.data.frame(t(Mercado_primario))
+colnames(a) <- unique(Mercado_primario$Year)
+a <- a[-1,]
+a <- a[c(1,2,3,7,4,5,6,8,9),]
+
+
 Mercado_primario_2 <- Mercado_primario[,c(1,8,9,10) ]
 
 
@@ -391,3 +402,106 @@ dygraphs::dygraph(Mercado_primario_2,
                   ylab = "Millones de dólares")%>%
               dyOptions(drawGrid = F)%>%dyLegend(width = 700)
 ```
+Elaboración propia en base a BCU
+
+Si vemos como se distribuye la operativa primaria dentro de los mercados encontramos que BEVSA es el ambiente donde se tranzan la mayoría de los títulos del sector privado en su primera transacción. Si se observa detenidamente el siguiente gráfico podemos ver que existió un cambio en la operativa de los títulos del sector público, pasándose de transarse principalmente en BEVSA a transarse en la operativa extrabursátil. En términos del sector de los títulos transados, el porcentaje de títulos transados del sector público y privado se asemejan en el volumen transado.
+
+```{r Mercado primario relativo,echo=FALSE,fig.height=5, fig.width=8}
+Mer_prim_rel <- Mercado_primario
+for(i in 1:ncol(Mer_prim_rel)) {if(i>1){ Mer_prim_rel[,i ]<- round(Mer_prim_rel[ ,i]/Mer_prim_rel[,ncol(Mer_prim_rel)], 4)}}
+
+BVM_P<- Mer_prim_rel%>%select(Year, BVM_P)%>%mutate(Bolsa="BVM", Sector="Publico")
+colnames(BVM_P) <- c("Year", "Porcentaje", "Bolsa", "Sector")
+```
+
+
+```{r mercado primario por bolsa y sector, echo=FALSE, fig.height=5, fig.width=8}
+BVM_Pr <- Mer_prim_rel%>%select(Year, BVM_Pr)%>%mutate(Bolsa="BVM", Sector="Privado")
+colnames(BVM_Pr) <- c("Year", "Porcentaje", "Bolsa", "Sector")
+BEVSA_P <- Mer_prim_rel%>%select(Year, BEVSA_P)%>%mutate(Bolsa="BEVSA", Sector="Publico")
+colnames(BEVSA_P) <- c("Year", "Porcentaje", "Bolsa", "Sector")
+BEVSA_Pr <- Mer_prim_rel%>%select(Year, BEVSA_Pr)%>%mutate(Bolsa="BEVSA", Sector="Privado")
+colnames(BEVSA_Pr) <- c("Year", "Porcentaje", "Bolsa", "Sector")
+Extr_P <- Mer_prim_rel%>%select(Year, Extrabursatil_P)%>%mutate(Bolsa="Extrabursatil", Sector="Publico")
+colnames(Extr_P) <- c("Year", "Porcentaje", "Bolsa", "Sector")
+Extr_Pr <- Mer_prim_rel%>%select(Year, Extrabursatil_Pr)%>%mutate(Bolsa="Extrabursatil", Sector="Privado")
+colnames(Extr_Pr) <- c("Year", "Porcentaje", "Bolsa", "Sector")
+
+M_P_H <- rbind(BVM_P,BVM_Pr, BEVSA_P, BEVSA_Pr, Extr_P, Extr_Pr )
+M_P_H$Porcentaje <- M_P_H$Porcentaje*100
+M_P_H$Titulo <- paste(M_P_H$Bolsa, M_P_H$Sector, sep="_")
+
+lala <- ggplot(M_P_H, aes(x = Year, y = Porcentaje, fill = Titulo)) + 
+  geom_bar(stat = "identity")+
+  scale_fill_brewer(palette = "Blues")+
+  scale_x_continuous(breaks = c(year_inicio:year_final))+
+  scale_y_continuous(breaks = seq(0,100,10))+
+  theme_classic()+
+  theme(legend.position = "bottom")+
+  labs(title="Mercado Primario,por tipo de titulo y bolsa transada",
+       subtitle = "Por bolsa transada y tipo de titulo transado",
+       x="Año",
+       y="Porcentaje sobre mercado primario",
+       fill="Bolsa/Tipo de Titulo",
+       caption = c("Elaboración propia en base a datos del BCU"))+
+  coord_flip()
+
+
+ggplotly(lala, tooltip = "all")
+
+
+```
+Elaboración propia en base a BCU
+
+Por último, analizando la operativa del mercado primario por instrumento transado, podemos observar en el siguiente gráfico que históricamente los principales instrumentos transados son los distintos instrumentos emitidos por el Banco central del Uruguay (Letras de regulación monetaria y letras de tesorería) y los certificados de depósitos emitidos por entidades financieras del sector privado. 
+
+```{r Grafico mercado primario, echo=FALSE, fig.height=5, fig.width=8}
+
+M_P_ins <- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "M_P_ins")
+
+MPI_1<- M_P_ins%>%select(Year, `Intrumentos BCU`) %>%mutate(Ins="Instrumentos BCU")
+colnames(MPI_1) <- c("Year", "Porcentaje", "Instrumento")
+MPI_2<- M_P_ins%>%select(Year, `CDS BROU`) %>%mutate(Ins="CD BROU")
+colnames(MPI_2) <- c("Year", "Porcentaje", "Instrumento")
+MPI_3<- M_P_ins%>%select(Year, `ONs y FF`) %>%mutate(Ins="ONs y FF")
+colnames(MPI_3) <- c("Year", "Porcentaje", "Instrumento")
+MPI_4<- M_P_ins%>%select(Year, `CDS Privados`) %>%mutate(Ins="CD Privados")
+colnames(MPI_4) <- c("Year", "Porcentaje", "Instrumento")
+MPI_5<- M_P_ins%>%select(Year, Forwards) %>%mutate(Ins="Forwards")
+colnames(MPI_5) <- c("Year", "Porcentaje", "Instrumento")
+MPI_6<- M_P_ins%>%select(Year, Otros) %>%mutate(Ins="Otros")
+colnames(MPI_6) <- c("Year", "Porcentaje", "Instrumento")
+MPI_7<- M_P_ins%>%select(Year, NDF) %>%mutate(Ins="NDF")
+colnames(MPI_7) <- c("Year", "Porcentaje", "Instrumento")
+MPI_8<- M_P_ins%>%select(Year, `Emisiones internacionales`) %>%mutate(Ins="Emisiones internacionales")
+colnames(MPI_8) <- c("Year", "Porcentaje", "Instrumento")
+MPI_9<- M_P_ins%>%select(Year, `Notas en UI`) %>%mutate(Ins="Notas en UI")
+colnames(MPI_9) <- c("Year", "Porcentaje", "Instrumento")
+
+MPI <- rbind(MPI_1,MPI_2,MPI_3,MPI_4,MPI_5,MPI_6,MPI_7,MPI_8,MPI_9)
+MPI$Porcentaje <- MPI$Porcentaje*100
+
+lala <- ggplot(MPI, aes(x = Year, y = Porcentaje, fill = Instrumento)) + 
+  geom_bar(stat = "identity", color="skyblue")+
+  scale_fill_brewer(palette = "Blues")+
+  scale_x_continuous(breaks = c(year_inicio:year_final))+
+  scale_y_continuous(breaks = seq(0,100,10))+
+  theme_classic()+
+  theme(legend.position = "bottom")+
+  labs(title="Mercado primario por tipo de instrumento negociado",
+       subtitle = "Por bolsa transada y tipo de titulo transado",
+       x="Año",
+       y="Porcentaje sobre mercado primario",
+       fill="Instrumento",
+       caption = c("Elaboración propia en base a datos del BCU"))+
+  coord_flip()
+
+
+ggplotly(lala, tooltip = "all")
+
+
+
+```
+Elaboración propia en base a BCU
+
+
