@@ -376,3 +376,17 @@ ggplotly(op3)
 Elaboración propia en base a BCU
 
 Si analizamos el mercado en el que se transan los distintos tipos de activos, se puede extraer una insight relevante, la mayoría de los títulos operados se transan en el mercado primario, por lo que la estrategia dominante en el mercado es buy and hold. Como se puede apreciar en el gráfico anterior, la operativa en el mercado primario supone cerca del 65% de la operativa total del mercado en los últimos años. Por dicha razón, conviene analizar con la información disponible en la página del BCU cuales son los instrumentos y los sectores que están activos en los segmentos del mercado.
+
+### 3.1.1 Análisis del Mercado Primario
+
+Analizando el comportamiento del mercado primario en Uruguay durante la última década, podemos extraer que la operativa promedio fue de aproximadamente 29.000 millones de dólares. Si analizamos como ha sido la evolución en esta década, podemos apreciar en el gráfico siguiente como la operativa del mercado primario distinguiendo títulos públicos y privados ha sido bastante similar. El crecimiento acumulado de la operativa ha sido de 43% en la ultima década. No obstante, ha tenido fuerte fluctuaciones como se puede apreciar en el gráfico.
+
+```{r Mercado primario relativo,echo=FALSE,fig.height=5, fig.width=8}
+Mer_prim_rel <- Mercado_primario
+for(i in 1:ncol(Mer_prim_rel)) {if(i>1){ Mer_prim_rel[,i ]<- round(Mer_prim_rel[ ,i]/Mer_prim_rel[,ncol(Mer_prim_rel)], 4)}}
+
+BVM_P<- Mer_prim_rel%>%select(Year, BVM_P)%>%mutate(Bolsa="BVM", Sector="Publico")
+colnames(BVM_P) <- c("Year", "Porcentaje", "Bolsa", "Sector")
+```
+
+
