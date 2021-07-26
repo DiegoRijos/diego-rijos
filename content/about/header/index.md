@@ -7,4 +7,4 @@ headline: |
 ---
 
 <!-- this is a subheadline -->
-Mi nombre es Diego Rijos, soy Licenciado en Economía por la Uiversidad de la República. En la actualidad me encuentro finalizando la Maestría en Finanzas en la misma institución. 
+Mi nombre es Diego Rijos, soy Licenciado en Economía por la Universidad de la República. En la actualidad me encuentro finalizando la Maestría en Finanzas en la misma institución. 
