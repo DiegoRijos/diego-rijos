@@ -635,6 +635,7 @@ No es de extrañarnos volúmenes tan bajos en la operativa del mercado secundari
 
 ### 3.3 Renta Variable nacional
 
+Como pudimos extraer del análisis anterior, la mayor parte de la operativa del mercado primario y secundario, se centra en títulos de renta fija. Como se podrá recordar a mediados del siglo XX existían 45 empresas que cotizaban sus acciones en la bolsa. A fecha de este informe, las empresas que [cotizan en bolsa ascienden a 7]( https://www.bvm.com.uy/operadores/emisores-de-acciones), estando listadas todas ellas en la Bolsa de Valores de Montevideo. Si analizamos como ha sido la operativa en el mercado de renta variable en Uruguay en los últimos 10 años, nos encontramos con un panorama francamente desolador. El promedio de las transacciones en renta variable los últimos 10 años ha sido de solamente 4.5 millones de dólares, con una desviación estándar de 2.4 millones de dólares. Como se puede apreciar en el siguiente gráfico, si bien hubo un comportamiento al alza en el período analizado, estos han sido por montos realmente bajos. 
 
 
 ```{r renta variable, echo=FALSE, fig.height=5, fig.width=8}
@@ -649,5 +650,7 @@ dygraphs::dygraph(Renta_variable,
 
 ```
 Elaboración propia en base a BCU
+
+Esta tendencia en la baja operativa en renta variable, ha sido una constante durante por lo menos cuatro décadas. La preponderancia de las obligaciones negociables como forma de financiarse, quizás sea una de las razones principales para que no se hayan generado nuevas IPO en las últimas décadas. Por su parte, en la actualidad hemos visto como una empresa uruguaya ha salido en bolsa en NASDAQ, cabe preguntarnos si esta no seria una fuente de financiamiento utilizada más frecuentemente por las empresas uruguayas de no ser por la poca profundidad del mercado. 
 
 
