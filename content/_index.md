@@ -1,7 +1,7 @@
 ---
 title: "Diego Rijos"
 subtitle: "Licenciado en Economía, Magister en Finanzas (c)"
-description: "Bienvenidos a este espacio donde intercambiaré mis opiniones sobre diversos temas al igual que trabajos de research"
+description: "Bienvenidos a este espacio donde intercambiaré mis opiniones sobre diversos temas de mi interés, al igual que compartir trabajos de research sobre diversas temáticas"
 date: 2019-02-18T12:27:33-06:00
 images:
   - img/fm.jpg
