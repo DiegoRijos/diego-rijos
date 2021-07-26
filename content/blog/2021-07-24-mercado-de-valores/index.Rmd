@@ -531,4 +531,119 @@ Elaboración propia en base a BCU
 
 Por otro lado, el comportamiento del mercado secundario, tiene una fuerte correlación respecto al mercado primario, dado que el comportamiento de ambos es similar. Respecto a la tasa de crecimiento durante el período, esta fue de 185% si comparamos las cifras de 2010 con la de 2020. Esta tasa se ve fuertemente influenciada por la baja operativa del mercado secundario en los primeros años del período.
 
+Como habíamos adelantado anteriormente, la principal operativa del mercado secundario en la transacción de valores públicos. Si analizamos cual es la institución que lleva adelante la mayoría de estas operaciones, BEVSA es el jugador preponderante en el mercado. Por su parte, también se puede observar como existió un cambio, dado que a inicio de la década la BVM tenia una mayor participación en este mercado, que se fue diluyendo a medida que nos acercamos a 2020.  Por su parte las transacciones de valores extranjeros se centran mayormente en BEVSA también. 
+
+```{r mercado secundario relativo, echo=FALSE, fig.height=5, fig.width=8}
+Mer_s_rel <- Mercado_secundario
+for(i in 1:ncol(Mer_s_rel)) {if(i>1){ Mer_s_rel[,i ]<- round(Mer_s_rel[ ,i]/Mer_s_rel[,ncol(Mer_s_rel)], 4)}}
+
+
+
+BVM_P<- Mer_s_rel%>%select(Year, BVM_P)%>%mutate(Bolsa="BVM", Sector="Publico")
+colnames(BVM_P) <- c("Year", "Porcentaje", "Bolsa", "Sector")
+BVM_Pr <- Mer_s_rel%>%select(Year, BVM_Pr)%>%mutate(Bolsa="BVM", Sector="Privado")
+colnames(BVM_Pr) <- c("Year", "Porcentaje", "Bolsa", "Sector")
+BVM_ex <- Mer_s_rel%>%select(Year, BVM_Ex)%>%mutate(Bolsa="BVM", Sector="Extranjero")
+colnames(BVM_ex) <- c("Year", "Porcentaje", "Bolsa", "Sector")
+BEVSA_P <- Mer_s_rel%>%select(Year, BEVSA_P)%>%mutate(Bolsa="BEVSA", Sector="Publico")
+colnames(BEVSA_P) <- c("Year", "Porcentaje", "Bolsa", "Sector")
+BEVSA_Pr <- Mer_s_rel%>%select(Year, BEVSA_Pr)%>%mutate(Bolsa="BEVSA", Sector="Privado")
+colnames(BEVSA_Pr) <- c("Year", "Porcentaje", "Bolsa", "Sector")
+BEVSA_ex <- Mer_s_rel%>%select(Year, BEVSA_Ex)%>%mutate(Bolsa="BEVSA", Sector="Extranjero")
+colnames(BEVSA_ex) <- c("Year", "Porcentaje", "Bolsa", "Sector")
+Extr_P <- Mer_s_rel%>%select(Year, Extrabursatil_P)%>%mutate(Bolsa="Extrabursatil", Sector="Publico")
+colnames(Extr_P) <- c("Year", "Porcentaje", "Bolsa", "Sector")
+Extr_Pr <- Mer_s_rel%>%select(Year, Extrabursatil_Pr)%>%mutate(Bolsa="Extrabursatil", Sector="Privado")
+colnames(Extr_Pr) <- c("Year", "Porcentaje", "Bolsa", "Sector")
+Extr_ex <- Mer_s_rel%>%select(Year, Extrabursatil_Ex)%>%mutate(Bolsa="Extrabursatil", Sector="Extranjero")
+colnames(Extr_ex) <- c("Year", "Porcentaje", "Bolsa", "Sector")
+
+MSH <- rbind(BVM_P, BVM_Pr,BVM_ex, BEVSA_P, BEVSA_Pr, BEVSA_ex, Extr_P, Extr_Pr, Extr_ex)
+MSH$Porcentaje <- MSH$Porcentaje*100
+MSH$Titulo <- paste(MSH$Bolsa, MSH$Sector, sep="_")
+
+msh <- ggplot(MSH, aes(x = Year, y = Porcentaje, fill = Titulo)) + 
+  geom_bar(stat = "identity", color="skyblue")+
+  scale_fill_brewer(palette = "Blues")+
+  scale_x_continuous(breaks = c(year_inicio:year_final))+
+  scale_y_continuous(breaks = seq(0,100,10))+
+  theme_classic()+
+  theme(legend.position = "bottom")+
+  labs(title="Operativa por bolsa transada",
+       subtitle = "Por bolsa transada y tipo de titulo transado",
+       x="Año",
+       y="Porcentaje sobre mercado primario",
+       fill="Bolsa",
+       caption = c("Elaboración propia en base a datos del BCU"))+
+  coord_flip()
+
+ggplotly(msh)
+
+```
+
+Si nos centramos en el tipo de activo negociado, en el siguiente gráfico podremos observa la relevancia relativa de cada tipo de instrumento en el mercado secundario. El principal activo negociado ha sido históricamente instrumentos emitidos por el BCU, concretamente letras de regulación monetaria y letras de tesorería. Por otro lado, las notas en Unidades Indexadas ha sido otro instrumento relevante en el volumen transado en el mercado secundario. Por su parte la transacción de emisiones internacionales se ha retraído respecto a los valores de principio de la década.
+
+```{r Grafico mercado secundario, echo=FALSE, fig.height=5, fig.width=8}
+
+M_S_ins <- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "M_S_ins")
+
+MSI_1<- M_S_ins%>%select(Year, `Bonos locales` ) %>%mutate(Ins="Bonos Locales")
+colnames(MSI_1) <- c("Year", "Porcentaje", "Instrumento")
+MSI_2<- M_S_ins%>%select(Year, `Emisiones internacionales`) %>%mutate(Ins="Emisiones internacionales")
+colnames(MSI_2) <- c("Year", "Porcentaje", "Instrumento")
+MSI_3<- M_S_ins%>%select(Year, `Letras de Tesoreria/LRM`) %>%mutate(Ins="Letras de Tesoreria/LRM")
+colnames(MSI_3) <- c("Year", "Porcentaje", "Instrumento")
+MSI_4<- M_S_ins%>%select(Year, `Nota en UI`) %>%mutate(Ins="Notas en UI")
+colnames(MSI_4) <- c("Year", "Porcentaje", "Instrumento")
+
+MSI_7<- M_S_ins%>%select(Year, `Valores extranjeros`) %>%mutate(Ins="Valores Extranjeros")
+colnames(MSI_7) <- c("Year", "Porcentaje", "Instrumento")
+MSI_8<- M_S_ins%>%select(Year, `Otros valores`) %>%mutate(Ins="Otros valores")
+colnames(MSI_8) <- c("Year", "Porcentaje", "Instrumento")
+MSI_9<- M_S_ins%>%select(Year, `Notas multilaterales`) %>%mutate(Ins="NNotas multilaterales")
+colnames(MSI_9) <- c("Year", "Porcentaje", "Instrumento")
+
+MSI <- rbind(MSI_1,MSI_2,MSI_3,MSI_4,MSI_7,MSI_8,MSI_9)
+MSI$Porcentaje <- MSI$Porcentaje*100
+
+lala <- ggplot(MSI, aes(x = Year, y = Porcentaje, fill = Instrumento)) + 
+  geom_bar(stat = "identity")+
+  scale_fill_brewer(palette = "Blues")+
+  scale_x_continuous(breaks = c(year_inicio:year_final))+
+  scale_y_continuous(breaks = seq(0,100,10))+
+  theme_classic()+
+  theme(legend.position = "bottom")+
+  labs(title="Mercado secundario por tipo de instrumento negociado",
+       subtitle = "Por bolsa transada y tipo de titulo transado",
+       x="Año",
+       y="Porcentaje sobre mercado secundario",
+       fill="Instrumento",
+       caption = c("Elaboración propia en base a datos del BCU"))+
+  coord_flip()
+
+
+ggplotly(lala, tooltip = "all")
+
+
+
+```
+
+No es de extrañarnos volúmenes tan bajos en la operativa del mercado secundario, debido a la estrategia buy and hold que tiene la mayoría de los inversores locales, por lo que rara vez se desprenden de los activos hasta su vencimiento. 
+
+### 3.3 Renta Variable nacional
+
+
+
+```{r renta variable, echo=FALSE, fig.height=5, fig.width=8}
+
+Renta_variable <- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "Renta_variable")
+
+dygraphs::dygraph(Renta_variable, 
+                  main = "Volumen operado de Renta Variable 2010-2020",
+                  xlab="Año",
+                  ylab = "Millones de dólares")%>%
+              dyOptions(drawGrid = F)%>%dyLegend(width = 700)
+
+```
+
 
