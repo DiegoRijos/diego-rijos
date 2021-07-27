@@ -275,7 +275,7 @@ dygraphs::dygraph(UP_2,
 Elaboración propia en base a INE
 
 
-# 3. Mercado de Valores en Uruguay
+## 3. Mercado de Valores en Uruguay
 
 Es imposible disociar la historia del país con la historia de su mercado financiero. Desde la creación de Sociedad Bolsa Montevideana, progenitora de la actual Bolsa de Valores de Montevideo en el siglo XIX, Uruguay ha contado con un lugar donde realizar el intercambio de las operaciones bursátiles. Las vicisitudes de le economía uruguaya han impactado fuertemente el nivel de operativa. En épocas de crecimiento, la bolsa ha visto florecer miles de transacciones que ayudaron a financiar a empresas que luego se convertirían en baluartes de la economía en su momento. Como suele suceder al comienzo, gran parte de la operativa se centraba en títulos de deuda pública, que al ser más seguros generan confianza en los inversores. La operativa poco a poco fue cambiando, y a mediados del siglo XX 45 empresas cotizaban en bolsa. No obstante, los años de alta inflación, la destrucción del valor de la moneda, las crisis provocadas por los desequilibrios, generaron una caída fuerte en la actividad bursátil. 
 
@@ -284,7 +284,7 @@ EL acercamiento al nuevo siglo trajo aparejado cambios y nuevos jugadores al mer
 Para este análisis he decidido enfocarme en la operativa de los últimos 10 años, como forma de tener un marco temporal que sea similar a lo esperable en los próximos 5 años. Es por ello que los siguientes párrafos se centraran en el estudio descriptivo sobre como ha evolucionado la operativa bursátil en nuestro país, distinguiendo por tipo de mercado y producto.
 
 
-## 3.1 Analisis de la Operativa para el período 2010-2020
+### 3.1 Analisis de la Operativa para el período 2010-2020
 
 Observando la siguiente tabla, podemos apreciar los montos de la operativa del mercado bursátil en Uruguay durante el período que va desde 2010 a 2020. La media de la operativa en los 3 mercados se situó en aproximadamente 36.000 millones de dólares, teniendo su máxima operativa en 2018 totalizándose aproximadamente 52.500 millones de dólares. En términos de desviación desde la media, el desvió estándar de la operativa total fue de aproximadamente de 9.000 millones de dólares. 
 
