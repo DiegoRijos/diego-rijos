@@ -348,7 +348,7 @@ dygraphs::dygraph(Operativa, main = "Operativa del Mercado de Valores Uruguayo 2
 ```
 Elaboración propia en base a BCU
 
-Si ponemos foco en la tasa de variación de la operativa, en los últimos 10 años esta tuvo un crecimiento de 63%. No obstante, ha tenido fuerte fluctuaciones durante el periodo, pasando en algunos casos por un retraimiento fuerte. Esta variación puede ser explicada por un cumulo de factores, por ejemplo, la poca profundidad del mercado, la performance de la economía uruguayo y una deficiente educación financiera que no encauza parte de los ahorros de la economía a este sector. 
+Si ponemos foco en la tasa de variación de la operativa, en los últimos 10 años esta tuvo un crecimiento de 63%. No obstante, ha tenido fuerte fluctuaciones durante el periodo, pasando en algunos casos por un fuerte retraimiento. Esta variación puede ser explicada por un cumulo de factores, por ejemplo, la poca profundidad del mercado, la performance de la economía uruguaya y una deficiente educación financiera que no encauza parte de los ahorros de la economía a este sector. 
 
 ```{r Operativa por mercado, echo=FALSE, fig.height=5, fig.width=8}
 OP_M <- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "OP")
@@ -404,7 +404,7 @@ dygraphs::dygraph(Mercado_primario_2,
 ```
 Elaboración propia en base a BCU
 
-Si vemos como se distribuye la operativa primaria dentro de los mercados encontramos que BEVSA es el ambiente donde se tranzan la mayoría de los títulos del sector privado en su primera transacción. Si se observa detenidamente el siguiente gráfico podemos ver que existió un cambio en la operativa de los títulos del sector público, pasándose de transarse principalmente en BEVSA a transarse en la operativa extrabursátil. En términos del sector de los títulos transados, el porcentaje de títulos transados del sector público y privado se asemejan en el volumen transado.
+Si vemos como se distribuye la operativa primaria dentro de los mercados encontramos que BEVSA es el ambiente donde se tranzan la mayoría de los títulos del sector privado en su primera transacción. Si se observa detenidamente el siguiente gráfico podemos ver que existió un cambio en la operativa de los títulos del sector público, pasándose de transarse principalmente en BEVSA a transarse en la operativa extrabursátil. En términos del sector de los títulos transados, el porcentaje de títulos transados del sector público y privado se asemejan en volumen.
 
 ```{r Mercado primario relativo,echo=FALSE,fig.height=5, fig.width=8}
 Mer_prim_rel <- Mercado_primario
@@ -529,7 +529,7 @@ dygraphs::dygraph(Mercado_sec_2,
 ```
 Elaboración propia en base a BCU
 
-Por otro lado, el comportamiento del mercado secundario, tiene una fuerte correlación respecto al mercado primario, dado que el comportamiento de ambos es similar. Respecto a la tasa de crecimiento durante el período, esta fue de 185% si comparamos las cifras de 2010 con la de 2020. Esta tasa se ve fuertemente influenciada por la baja operativa del mercado secundario en los primeros años del período.
+Por otro lado, el comportamiento del mercado secundario, tiene una fuerte correlación respecto al mercado primario, observándose un comportamiento similar. Respecto a la tasa de crecimiento durante el período, esta fue de 185% si comparamos las cifras de 2010 con la de 2020. Esta tasa se ve fuertemente influenciada por la baja operativa del mercado secundario en los primeros años del período.
 
 Como habíamos adelantado anteriormente, la principal operativa del mercado secundario en la transacción de valores públicos. Si analizamos cual es la institución que lleva adelante la mayoría de estas operaciones, BEVSA es el jugador preponderante en el mercado. Por su parte, también se puede observar como existió un cambio, dado que a inicio de la década la BVM tenia una mayor participación en este mercado, que se fue diluyendo a medida que nos acercamos a 2020.  Por su parte las transacciones de valores extranjeros se centran mayormente en BEVSA también. 
 
@@ -651,7 +651,7 @@ dygraphs::dygraph(Renta_variable,
 ```
 Elaboración propia en base a BCU
 
-Esta tendencia en la baja operativa en renta variable, ha sido una constante durante por lo menos cuatro décadas. La preponderancia de las obligaciones negociables como forma de financiarse, quizás sea una de las razones principales para que no se hayan generado nuevas IPO en las últimas décadas. Por su parte, en la actualidad hemos visto como una empresa uruguaya ha salido en bolsa en NASDAQ, cabe preguntarnos si esta no seria una fuente de financiamiento utilizada más frecuentemente por las empresas uruguayas de no ser por la poca profundidad del mercado. 
+Esta tendencia en la baja operativa en renta variable, ha sido una constante durante por lo menos cuatro décadas. La preponderancia de las obligaciones negociables como forma de financiarse, quizás sea una de las razones principales para que no se hayan generado nuevas IPO en las últimas décadas. Por su parte, en la actualidad hemos visto como una empresa uruguaya ha salido en bolsa en NASDAQ, cabe preguntarnos si esta no seria una fuente de financiamiento utilizada más frecuentemente por las empresas uruguayas de no ser por la poca profundidad del mercado local.
 
 Si analizamos la constitución de fideicomisos financieros, la última década trajo aparejado un monto promedio de 210 millones de dólares de fideicomisos constituidos anualmente, con una desviación respecto a la media de 73 millones de dólares. Si observamos el gráfico, podemos ver como esta ha sido relativamente estable a partir de 2013, siguiendo la dinámica del mercado en general.
 
