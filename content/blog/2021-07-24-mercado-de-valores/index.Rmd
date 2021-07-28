@@ -704,4 +704,4 @@ El Profesor Pascale siempre nos comenta en sus clases, que el Uruguay es un paí
 
 
 
-La información en la que esta basada este informe se encuentra en los Reportes del Sistema Financiero, publicado anualmente por el Banco Central del Uruguay. Las demás variables, se extraen de diversas fuentes, cada uno de los gráficos posee el lugar donde se extrajeron los datos.
+*La información en la que esta basada este informe se encuentra en los Reportes del Sistema Financiero, publicado anualmente por el Banco Central del Uruguay. Las demás variables, se extraen de diversas fuentes, cada uno de los gráficos posee el lugar donde se extrajeron los datos.*
