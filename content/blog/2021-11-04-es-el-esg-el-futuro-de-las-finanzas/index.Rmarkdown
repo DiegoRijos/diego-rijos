@@ -37,7 +37,7 @@ Fuente: Morningstar Manager Research
 
 Por su parte, en términos de rendimiento, la inversión en ESG se ha mostrado particularmente más resiliente a los reveses del mercado. En términos generales, los índices que consideran el ESG en su estrategia de inversión han tenido un mayor rendimiento que sus pares que no las consideran. En este sentido, optar por invertir en empresas o gobiernos que promuevan la sostenibilidad no sólo genera rendimiento para el inversor, sino que generan externalidades positivas.
 
-Como firme creyente en que las finanzas son un medio para mejorar la vida de las personas, el giro que están tomando el paradigma de las finanzas en el último tiempo es una señal alentadora. Aún queda mucho trabajo por delante, la mejora en la información al respecto, la inclusión en el análisis crediticio de la deuda soberana de aspectos ESG, entre otros tantos desafíos. Sin embargo, dado el corto tiempo que se lleva implementando su integración la acogida por parte del mercado ha sido buena, es posible soñar en un futuro sostenible siendo las finanzas un medio para tal fin.
+Como firme creyente en que las finanzas son un medio para mejorar la vida de las personas, el giro que están tomando el paradigma de las finanzas en el último tiempo es una señal alentadora. Aún queda mucho trabajo por delante, la mejora en la información al respecto, la inclusión en el análisis crediticio de la deuda soberana de aspectos ESG, entre otros tantos desafíos. Sin embargo, dado el corto tiempo que se lleva implementando su integración en el mainstream de las finanzas, la acogida por parte del mercado ha sido buena, lo que hace posible soñar en un futuro sostenible siendo las finanzas un medio para tal fin.
 
 
 
