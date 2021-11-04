@@ -12,7 +12,7 @@ tags:
   - Finanzas
   - Finanzas Sostenibles
 subtitle: ''
-excerpt: "El mundo de las finanzas ha ido evolucionando hacia la consideración de factores Sociales, Ambientales y de Gobernanza. La incorporación de estos factores en la toma de decisiones ha generado nuevos productos al igual que nuevas interrogantes."
+excerpt: "El mundo de las finanzas ha ido evolucionando hacia la consideración de factores Sociales, Ambientales y de Gobernanza. La incorporación de estos factores en la toma de decisiones ha generado nuevos productos al igual que nuevas interrogantes. ¿Estamos acaso ante un nuevo paradigma en las finanzas?"
 series: ~
 layout: single
 ---
