@@ -1,7 +1,7 @@
 ---
 title: ¿Es el ESG el futuro de las finanzas?
 author: Diego Rijos
-date: '2021-11-04'
+date: '2021-11-05'
 slug: []
 categories:
   - ESG
