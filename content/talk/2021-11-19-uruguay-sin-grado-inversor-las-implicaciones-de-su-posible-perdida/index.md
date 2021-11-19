@@ -47,12 +47,8 @@ Por otro lado la pérdida del grado inversor podría repercutir en una caída en
 
 En el último informe de la calificadora Moody’s, la que nos mantuvo el grado inversor (Baa2) con perspectiva estable, luego del anuncio de la instalación de UMP y el TLC UE-MERCOSUR, se enfatizaba que se esperaba que dada la tradición de los actores políticos, se lograra llegar a consensos en materia fiscal y económica. S&P por su parte coincide con el análisis de Moody’s, en especial por la fortaleza del sistema institucional uruguayo. Por su parte Fitch califico con un BBB con perspectiva negativa, es decir en la frontera de perdida de grado. Las razones esgrimidas se acercan al análisis realizado en este artículo, problemas de control de déficit fiscal, inflación, entre otros. Este es un desafío que todo el sistema político debe enfrentar, no solo para mantener el grado inversor, sino por el futuro del país.
 
-Notas:
-
 1 Ley de los cincuentones hará que el déficit actual del BPS aumente en el largo plazo, incrementando así el déficit fiscal, dado lo demás constante.
-
 2 En especial con problemas relacionados a la productividad del trabajo y los niveles de capital humano, consecuencias claras de la divergencia del país con los postulados de la llamada “Economía del Conocimiento”. 
-
 3 Debido a que la economía uruguaya (al igual que la paraguaya) es más abierta en términos relativos que Argentina y Brasil, es esperable que el efecto de la liberalización comercial sea menor, debido a que el impacto en el comercio que causará la baja de aranceles será menor que el que tendrán los socios más cerrados.
 
 
