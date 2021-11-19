@@ -113,7 +113,7 @@ enableEmoji = true
     url = "/project/"
     weight = 3
   [[menu.header]]
-    name = "Presentaciones y charlas"
+    name = "Presentaciones y apariciones en prensa"
     title = "Talks"
     url = "/talk/"
     weight = 4
