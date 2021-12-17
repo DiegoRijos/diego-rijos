@@ -1,6 +1,6 @@
 ---
 title: "ESG: ¿El futuro de las Finanzas?"
-excerpt: "¿Qué pasaría si Uruguay perdiera el Grado Inversor en su deuda soberana? Este artículo dará algunos lineamientos de sus posibles consecuencias "
+excerpt: "Las finanzas están cambiando. La integración de factores Sociales, Ambientales y de Gobernanza (ESG por sus siglas en inglés), han ido permeando en las estrategias de inversión por parte de los principales fondos de inversión. Uruguay no ha sido ajeno a estos cambios, pero ¿Estamos preparados?"
 date: 2021-12-09
 
 show_post_time: false
