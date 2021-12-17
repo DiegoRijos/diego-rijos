@@ -29,7 +29,7 @@ links:
 - icon: file-download
   icon_pack: fas
   name: Descargar pdf
-  url: download/ESG_el_futuro_finanzas.pdf
+  url: https://www.scribd.com/document/545788104/2021-12-09-principal-12
 ---
 
 
