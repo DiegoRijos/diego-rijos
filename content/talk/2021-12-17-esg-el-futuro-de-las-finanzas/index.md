@@ -31,7 +31,7 @@ links:
   name: Descargar pdf
   url: https://www.scribd.com/document/545788104/2021-12-09-principal-12
 ---
-
+![](images/59b5a4fdc5dd1.jpeg)
 
 Las finanzas están cambiando. La integración de factores Sociales, Ambientales y de Gobernanza (ESG por sus siglas en inglés), han ido permeando en las estrategias de inversión por parte de los principales fondos de inversión. La adopción por parte de estos de estrategias que contemplen la sostenibilidad es patente, según la US SIF Foundation en un estudio de 2020, 1 de cada 3 dólares de los activos bajo manejo profesional en Estados Unidos se encuentran atados a algún tipo de estrategia sostenible (US SIF Foundation, 2020). Este cambio no ha sido de un día para el otro, comenzó con la paulatina incorporación de la Responsabilidad Social Empresarial, y ha ido evolucionando hacia la integración de nuevos factores como lo son los pilares ambientales y de gobernanza.
 
