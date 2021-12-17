@@ -1,7 +1,7 @@
 ---
 title: "ESG: ¿El futuro de las Finanzas?"
 excerpt: "¿Qué pasaría si Uruguay perdiera el Grado Inversor en su deuda soberana? Este artículo dará algunos lineamientos de sus posibles consecuencias "
-date: 2021-12-17
+date: 2021-12-09
 
 show_post_time: false
 
