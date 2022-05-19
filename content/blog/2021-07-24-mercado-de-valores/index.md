@@ -1,55 +1,628 @@
 ---
-title: "Uruguay y ESG: oportunidades para la gestión activa de la deuda soberana"
-excerpt: "Uruguay tiene una posición de privilegio en los mercados internacionales debido a su buena performance ESG. Esto abre la puerta para la capitalización de esta ventaja en el manejo activo de la deuda soberana. En la siguiente nota, explico un poco más sobre los fundamentos que hacen que Uruguay este bien posicionado, al igual que una explicación breve de los instrumentos a los que podría acceder la República para explotar estas ventajas."
-date: 2022-05-12
-
-show_post_time: false
-
+title: "Mercado de Valores en Uruguay"
+subtitle: "Análisis de la última década"
+excerpt: "Con el resurgimiento de la Comisión de Promoción del Mercado de Valores, se ha vuelto a poner en la mesa la importancia para el país de tener un mercado de valores fuerte y dinámico, que permita a los distintos agentes de la economía, financiarse por medio de la emisión de títulos. El objetivo del presente artículo es analizar el comportamiento del mercado de valores en la última década, haciendo un análisis de algunas variables que nos permitan generar algunos insights relevantes sobre lo que ha sucedido la pasada década."
+date: 2021-07-27
 author: "Diego Rijos"
-location: "Montevideo, Uruguay"
 draft: false
+# layout options: single, single-sidebar
 layout: single
 categories:
-  - El Observador
-  - Academia Nacional de Economía
-  - ESG
-  - Finanzas Sostenibles
-  - Mercado de Valores
-tags:
-  - Finanzas Sostenibles
-  - Gestión de Deuda
-  - ESG
+- R
+- Finanzas
+- Mercado de Valores
+---
+```{r setup, include=FALSE}
+library(tidyverse)
+library(readxl)
+library(readr)
+library(openxlsx)
+library(xts)
+library(plotly)
+library(RColorBrewer)
+library(knitr)
+library(ggplot2)
+library(dygraphs)
+library(magrittr)
+year_inicio <- 2010
+year_final <- 2020
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+excel_sheets("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx")
+Operativa<- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "Operativa")
+Mercado_primario<- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "Mercado_primario")
+Mercado_secundario <-read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "Mercado_secundario")
+Obl_negociables <-  read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "Obl_negociables")
+```
 
-links:
-- icon: readme
-  icon_pack: fab
-  name: Link a la nota en El Observador
-  url: https://www.elobservador.com.uy/nota/uruguay-y-esg-oportunidades-para-la-gestion-activa-de-la-deuda-soberana-202251119190
+![](images/bolsa-de-valores-1400x410-1.jpg)
+
+## 1. Breve introducción
+
+
+Con el resurgimiento de la Comisión de Promoción del Mercado de Valores, se ha vuelto a poner en la mesa la importancia para el país de tener un mercado de valores fuerte y dinámico, que permita a los distintos agentes de la economía, financiarse por medio de la emisión de títulos. El objetivo del presente artículo es analizar el comportamiento del mercado de valores en la última década, haciendo un análisis de algunas variables que nos permitan generar algunos insights relevantes sobre lo que ha sucedido la pasada década. Para ello, haremos un pequeño repaso de variables macrofinancieras relevantes en la última década, como forma de poner en contexto la operativa del mercado de valores. Luego de esto se analizará el mercado bursátil en Uruguay, y como ha evolucionado en la última década. Finalmente, como forma de darle un cierre al análisis se presentarán las perspectivas futuras y las líneas de trabajo que están llevando adelante la CPMV en conjunto con actores relevantes del sector.
+
+
+## 2. Uruguay: Los últimos 10 años
+
+### 2.1 Perspectiva General
+
+La economía uruguaya en los últimos 10 años ha enfrentado ciertas dificultades en el crecimiento de su economía. Si bien, las tasas de crecimiento han sido positivas en gran parte del período, vemos como el dinamismo de la economía ha ido menguando desde 2010 a la fecha. Un entorno menos favorable para la canasta de exportación de Uruguay en conjunto con menos inversión por parte de los agentes económicos, han tenido como consecuencia un menor dinamismo. 2020 es el primer año del período analizado para el que se observa una tasa de crecimiento de la economía negativa. Este mal desempeño de la economía uruguaya se debe a la crisis económica que ha generado la aparición del COVID-19. Si bien Uruguay no entró en una cuarentena obligatoria, la reducción de la movilidad y de la actividad económica, impactó fuertemente en la economía. Si vemos las previsiones que existen a la fecha por parte del Fondo Monetario Internacional, éstas prevén una recuperación de la economía en 2021, estabilizándose la tasa de crecimiento en el orden del 3%. La [encuesta de expectativas económicas de julio de 2021](https://www.bcu.gub.uy/Estadisticas-e-Indicadores/Encuesta%20de%20Expectativas%20Econmicas/iees06i0721.pdf), muestra un comportamiento similar, por lo que los analistas locales estan esperando un crecimiento muy cercano al previsto por el IMF. De todas maneras, el último [informe trimestral en 2021](https://www.bcu.gub.uy/Estadisticas-e-Indicadores/Cuentas%20Nacionales/Informe%20de%20Cuentas%20Nacionales%20Trimestrales_2021_01.pdf) , ha mostrado signos que la economía no se estaría recuperando tan vigorosamente como se preveía.
+
+```{r PIB crecimiento, echo=FALSE, fig.height=2.5, fig.width=8}
+PIB <- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "PIB")
+PIB$Year <-  as.numeric(PIB$Year)
+dygraphs::dygraph(PIB, 
+                  main = "Tasa de Crecimiento PIB 2010-2024",
+                  xlab="Año",
+                  ylab = "Tasa de Crecimiento")%>%
+              dyOptions(drawGrid = F)%>%dyLegend(width = 700)
+```
+Elaboración propia en base a Banco Mundial, IMF, BCU, Itaú BBA
+
+Si analizamos la composición del PIB por sectores, se puede observar como uno de los sectores de mayor peso en la economía han sido los servicios, seguido por la industria y el comercio.
+
+```{r PIB sectorial, echo=FALSE, fig.height=5, fig.width=8}
+PIB_sec <- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "Pib_sect")
+PIB_sec$Porcentaje <- round(PIB_sec$Porcentaje*100,2)
+a <- ggplot(PIB_sec, aes(x = year, y = Porcentaje, fill = Sector)) + 
+  geom_bar(stat = "identity", color="skyblue")+
+  scale_fill_brewer()+
+  scale_x_continuous(breaks = c(year_inicio:year_final))+
+  scale_y_continuous(breaks = seq(0,100,10))+
+  theme_classic()+
+  theme(legend.position = "left")+
+  labs(title="PIB sectorial 2010-2019", subtitle = "Por bolsa transada y tipo de titulo transado", x="Año", y="Porcentaje PIB" )+
+  coord_flip()
+ggplotly(a)
+```
+Elaboración propia en base a MIEM
+
+El crecimiento no ha sido el único problema que ha tenido que enfrentar en los últimos años la economía uruguaya. La persistencia de una alta tasa de desempleo ha sido un fuerte reflejo por parte del mercado laboral del menor dinamismo por parte de la economía. La situación producida por la pandemia, por su parte, ha empeorado la situación disparando las cifras de desempleo. Por otro lado, la pandemia ha puesto al descubierto un problema endémico de la economía nacional, la informalidad en el mercado laboral.
+
+```{r demempleo, echo=FALSE, fig.height=2.5, fig.width=8}
+Desem <-  read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "Desempleo")
+dygraphs::dygraph(Desem, 
+                  main = "Tasa de desempleo 2010-2020",
+                  xlab="Año",
+                  ylab = "Tasa de Desempleo")%>%
+              dyOptions(drawGrid = F)%>%dyLegend(width = 700)
+```
+Elaboración propia en base a INE
+
+Los efectos de un menor dinamismo en la economía de nuestros vecinos (incluso antes del impacto de la pandemia), ha generado un menor dinamismo en el sector exportador. Desde este punto de vista, si bien el país ha buscado una apertura económica con preferencia arancelaria mediante tratados negociados en conjunto con el Mercosur, estos no se han materializado ni entrado en vigor. Ejemplos claros de esto son los tratados entre Mercosur y la Unión Europea y Mercosur EFTA, que, si bien terminaron las negociaciones y se llegó a un acuerdo, éstos no han sido ratificados ni puestos en vigencia hasta la fecha. Por su parte, siguen en negociación otros tratados entre el bloque y la República de Corea al igual que con Singapur. El actual gobierno, con una óptica más aperturista respecto al comercio exterior, ha estado buscando el aval de sus socios en la flexibilización del bloque comercial para permitir a sus miembros negociar con terceros países a nombre propio. Al momento de escribir estas palabras, no esta muy claro cual va a ser el rumbo que van a tomar dichos esfuerzos.
+
+Por otro lado, el panorama internacional muestra un nuevo boom en el precio de las commodities, producto del aumento en la demanda de estos productos en el mercado mundial. Las causas de este aumento no están del todo claras, ya que no está claro si se debe enteramente a un aumento de la demanda o a un vuelco de la liquidez del mercado financiero global en estos tipos de mercancías. De todas maneras, está puede ser una vía por la cual el país pueda retomar la senda del crecimiento económico en el corto plazo. No obstante, para mantener esta senda en el largo plazo van a ser necesarias reformas de carácter más profundo que necesitarán fuertes consensos entre los distintos actores políticos y sociales del país.
+
+
+```{r commodities, echo=FALSE, fig.height=5, fig.width=8}
+Com <- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "Com")
+Com <- xts(x=Com[,-1], order.by = Com$Fecha)
+dygraphs::dygraph(Com, 
+                  main = "Cotización mensual contratos futuros",
+                  xlab="Año",
+                  ylab = "Precio por contrato")%>%
+              dyOptions(drawGrid = F)%>%dyLegend(width = 700)%>%
+              dyRangeSelector()
+```
+Elaboración propia en base a Investing.com
+
+En materia fiscal, se ha vivenciado un fuerte deterioro en las cuentas fiscales, no pudiéndose cuadrar las cuentas fiscales en la ultima década. El efecto cincuentones mejoró el ratio de déficit fiscal/PIB, pero se ha mantenido en los últimos años en niveles superiores al 5%. El plan de consolidación fiscal propuesto por el gobierno en funciones, ha tenido que ser parcialmente aplazado debido a la aparición de la pandemia de Covid-19. No obstante, es esperable que, de materializarse una mejora en la situación sanitaria y económica, los esfuerzos del gobierno estén alineados con mitigar esta problemática. 
+
+Por otra parte, en términos de política monetaria, existió un cambio desde un esquema de agregados monetarios a la fijación de una tasa de interés de referencia a un día de plazo. Esto, sumado al estrechamiento del rango de inflación, han generado un mayor clima de confianza que ha repercutido en una leve baja en la inflación según el departamento de [Research de BBVA](https://www.elpais.com.uy/economia-y-mercado/seis-meses-instaurada-nueva-politica-monetaria.html) al igual que ha performado correctamente a la hora de extender la política monetaria a la economía real vía LRM.
+
+## 2.2 Principales variables macroeconómicas y financieras
+
+Es conveniente, para proseguir en el análisis, observar la evolución de algunas variables macrofinancieras claves. De esta forma extraer algunos insights sobre la posible repercusión de estas en la dinámica del mercado de valores en Uruguay en años recientes. 
+
+### 2.2.1 Riesgo País
+Una variable clave a la hora de mirar el mercado, es el Riesgo País. El valor de éste repercute fuertemente en la tasa en las que los distintos agentes de la economía pueden endeudarse. En el marco de este análisis, el valor de este indicador repercute en la tasa a la que se emiten los activos financieros en el mercado bursátil, dado que se incorpora conjuntamente con los riesgos propios de los emisores. 
+
+Observando la gráfica siguiente, podremos observar como el máximo de la serie se produjo en marzo de 2020. Este comportamiento se debió principalmente al pánico financiero en los principales mercados desencadenado por la expansión del coronavirus a lo largo del orbe. Este comportamiento ha sido análogo en la mayoría de los países de los mercados emergentes, debido a la mayor incertidumbre en el manejo posible de las consecuencias económicas de la pandemia. Si bien este máximo histórico de 401 puntos básicos se generó en cuestión de días, tuvo una fuerte reversión a la media. Esta reversión en parte fue consecuencia del buen manejo de la situación sanitaria en los meses siguientes al estallido de la pandemia al igual que el enfoque de libertad responsable que amortiguó los efectos provocados por una posible cuarentena obligatoria. 
+
+```{r Riesgo pais, echo=FALSE, fig.height=5, fig.width=8}
+UBI <- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "UBI")
+library(xts)
+UBI <- xts(x = UBI$UBI, order.by = UBI$Fecha)
+colnames(UBI) <- "UBI"
+dygraphs::dygraph(UBI, 
+                  main = "Riesgo País (UBI RAFAP) 2010-2020",
+                  xlab="Año",
+                  ylab = "RAFAP UBI")%>%
+              dyOptions(drawGrid = F)%>%
+              dyRangeSelector()%>%
+              dyEvent("2020-03-13", "Primer caso confirmado de Covid-19", labelLoc = "top")%>%
+              dyLimit(as.numeric(max(UBI$UBI)), color = "red")%>%
+              dyLimit(as.numeric(min(UBI$UBI)), color = "green")
   
-- icon: file-download
-  icon_pack: fas
-  name: Descargar pdf
-  url: https://www.scribd.com/document/574959631/Uruguay-y-ESG-oportunidades-para-la-gestion-activa-de-la-deuda-soberana
-  
-  ---
-  
-  Uruguay y ESG: Oportunidades para la gestión activa de la deuda soberana
+```
+Elaboración propia en base a RAFAP
 
-La integración de los factores ESG en las estrategias de inversión ha ido en aumento en los últimos años. Cómo adelantaba en la [columna de diciembre del año pasado] (https://diegorijos.com/talk/2021-12-17-esg-el-futuro-de-las-finanzas/) , la industria financiera está mirando fuertemente estos factores a la hora de seleccionar los instrumentos de inversión para los portafolios. Esto representa una oportunidad única para Uruguay a la hora de planear el manejo de su deuda soberana. 
+La caída en el riesgo país ha permitido a Uruguay salir a emitir deuda durante la pandemia a tasas de interés históricamente bajas. En concreto se logró emitir en junio de 2020 el equivalente a USD 2000 millones, siendo la reapertura del bono en dólares con vencimiento en 2031 y la emisión de un nuevo bono en unidades indexadas con vencimiento en 2040. Ambos tienen una amortización escalonada los últimos 3 años antes de su vencimiento, un esquema ya visto en bonos lanzados por Uruguay anteriormente. Las tasas a las que accedió fueron 3.875% anual en UI y 2.48% anual en dólares. [En mayo de 2021](http://deuda.mef.gub.uy/innovaportal/file/30159/1/comunicado-de-prensa-global-pesos-2031_reapertura-usd-2031_13_05_2021.pdf), el Estado volvió a emitir deuda en el mercado internacional, pero esta vez en moneda nacional nominal por un monto equivalente a USD 1166 millones. Este bono con vencimiento a 10 años, devenga una tasa de 8.25% anual, siendo esta la tasa más baja a la que el país ha accedido al financiamiento en moneda nacional. Parte de este apetito por bonos nominados en pesos corrientes se debe a una previsión en la fortaleza de la moneda local frente a la divisa estadounidense, esperándose una apreciación en los próximos años. La transacción se completó con la reapertura del bono nominado en dólares con vencimiento 2031.
 
-Podemos definir al ESG soberano como la interacción de las variables ambientales, sociales y de gobernanza que afectan la performance económica de un país. Esto es como afecta variables tales como la corrupción, el imperio de la ley, la protección ambiental y la desigualdad entre otros indicadores en el devenir económico de una economía. Cuanto más fuerte sean estos fundamentos, mejor preparada esta la economía para poder tener una mayor resiliencia ante shocks adversos.
 
-Si analizamos la performance de Uruguay en los principales indicadores de ESG soberanos, encontramos que el país se encuentra dentro de los países mejor puntuados. Esto no nos debería asombrar, Uruguay posee una fuerte tradición de institucionalidad y estabilidad política, lo que influye en el mantenimiento de políticas de Estado en el tiempo. Esta fortaleza en gobernanza, también se ve reflejada en el pilar Social. Políticas de Estado de largo aliento que han impactado en la demografía, la libertad política y social, derechos humanos entre otros factores, lo que nos pone a la vanguardia en dicho pilar.  Desde el punto de vista ambiental, el país destaca en su transición energética hacia una matriz de energía renovable y su protección de biomas. Además de esto, la adhesión a los Objetivos del Desarrollo Sostenible y los Acuerdos de París posicionan a Uruguay como un país comprometido en la materia.
+### 2.2.2 Calificación de riesgo
 
-Esta performance del Estado uruguayo, ha permitido al país destacarse en los mercados internacionales respecto a sus pares. Analizando el Emerging Markets Bond Index (EMBI) realizado por JP Morgan, Uruguay representa aproximadamente el 2,5% de dicho índice. Una vez que éste es ajustado por la performance ESG del país, la ponderación en el índice se ubica aproximadamente en el entorno del 5%. Esto significa que, si los inversores se plegasen a este índice a la hora de elegir sus estrategias de inversión, deberían invertir el doble de lo que hoy hacen en instrumentos financieros emitidos por el Estado uruguayo. Esto repercute en un aumento en la base inversora de los bonos, al igual que un mayor atractivo para los fondos que se especializan en la inversión de activos con alto impacto ESG en la integración de dichos bonos en sus portafolios.
+Si analizamos como ha sido la evolución de la calificación de riesgo para la economía uruguaya podemos observar cómo desde 2005, luego de la crisis económica de 2002 donde los títulos de deuda estuvieron al borde de entrar en categoría de default, esta ha mejorado sustancialmente. Pasada la crisis, se comenzó a recuperar la confianza de los inversores y las calificadoras tomaron nota de ello. Ese aumento en la confianza, repercutió en una mejora de la calificación de riesgo, lográndose el grado inversor en 2012. Los problemas en el crecimiento, la alta relación del stock de deuda vs PIB, el deterioro de las cuentas fiscales ha minado la estabilidad del grado inversor, encendiendo algunas luces de alarma en las calificadoras de riesgo. No obstante, a pesar de estas razones las calificadoras han mantenido la confianza en la capacidad de pago de la economía. 
 
-Por su parte, las calificadoras de riesgo también están empezando a introducir los pilares E y S de su análisis. Esto implica que además de los factores tradicionales de Gobernanza, empiezan a pesar la estabilidad social y los riesgos asociados al cambio climático en la calificación de riesgo. Esto trae aparejado para el Estado la necesidad de cuidar no sólo las variables usuales como déficit fiscal, crecimiento e inflación, sino empezar a interiorizar estas nuevas dimensiones. 
+ 
 
-Este nuevo entorno y exigencias de inversión pone en relevancia cambios en la gestión de la deuda soberana de los países. En este sentido, Boitreaud et. al. (2020) en un trabajo para el Banco Mundial publicaron una guía para las oficinas de gestión de deuda, dando consejos y directivas para desenvolver su labor en este nuevo entorno. Dentro de las principales recomendaciones para la gestión de deuda la integración de aspectos ESG en la emisión de instrumentos ha sido una de las más destacadas. Sobre este punto, en lo que no hay consenso es en la forma en la cual proceder con esta integración. Una aproximación es emitir bonos tradicionales, demostrando al mercado mediante los roadshows y la publicación de información periódica sobre la performance ESG del país. Esta estrategia tiene la ventaja de ser escalable, aunque en contrapartida es menos efectiva a la hora de obtener tasas más bajas. Otra aproximación es la emisión de deuda para realizar proyectos que mejoren alguno de los Objetivos del Desarrollo Sostenible, siendo los fondos recibidos únicamente usados para llevar a cabo dicho proyecto. Esta aproximación tiene mayor impacto en las tasas, pero en contrapartida es poco escalable. Una tercera vía, es la emisión de instrumentos híbridos que tomen lo mejor de las precedentes aproximaciones.
+```{r calificación, echo=FALSE , fig.height=5, fig.width=8}
+GI <- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "GI")
+GI_2 <- xts(x = GI[,c(-1,-5,-6)], order.by = GI$Fecha)
+GI_2$`S&P` <- factor(GI_2$`S&P`, levels=c("B3/B-","B2/B","B1/B+","Ba3/BB-","Ba2/BB","Ba1 /BB+","Baa3/BBB-","Baa2/BBB","Baa1/BBB+","A3/A-","A2/A" ))
+GI_2$`Moody's` <- factor(GI_2$`Moody's` , levels=c("B3/B-","B2/B","B1/B+","Ba3/BB-","Ba2/BB","Ba1 /BB+","Baa3/BBB-","Baa2/BBB"))
+GI_2$`Fitch Ratings` <- factor(GI_2$`Fitch Ratings` , levels=c("B3/B-","B2/B","B1/B+","Ba3/BB-","Ba2/BB","Ba1 /BB+","Baa3/BBB-","Baa2/BBB"))
+dygraphs::dygraph(GI_2, 
+                  main="Calificación crediticia Uruguay",
+                  x="Año",
+                  y="Calificación")%>% dyOptions(drawGrid = F)%>%dyLegend(width = 700)%>%
+              dyLimit(as.numeric(7), color = "red", label = "Grado Inversor")
+```
+```{r cuadro, echo=FALSE}
+a <- c("B3/B-","B2/B","B1/B+","Ba3/BB-","Ba2/BB","Ba1 /BB+","Baa3/BBB-","Baa2/BBB")
+b <- c(1,2,3,4,5,6,7,8)
+c <- rbind(b,a)
+rownames(c) <- c("Código", "Calificación")
+kable(c)
+```
 
-Estos instrumentos híbridos, llamados Sustainability-Linked Bonds, son bonos que tienen como covenants la concreción de ciertas metas de sostenibilidad. La lógica detrás del bono, se puede resumir como el cambio de las condiciones financieras o de estructura del bono, en el caso que se incumpla con la meta impuesta.  Esto implica que existe un proceso de calibración y verificación de la meta realizada por terceros, de forma de mantener una opinión independiente. El cambio de condiciones comúnmente es un cambio en la tasa de interés del bono, comenzando con una tasa base y de no lograrse el objetivo se le agrega una prima por encima, encareciéndose de esta manera el servicio de deuda. 
+Elaboración propia en base a calificadoras
 
-En este sentido, según trascendidos de prensa y comunicaciones por parte de la Unidad de Gestión de Deuda del MEF, se está planeando emitir en los próximos meses un bono de éstas características. Según la Presentación a Inversores de febrero de 2022, este tomará como objetivo las reducciones en la emisión de gases de efecto invernadero pactadas por Uruguay en los Acuerdos de París. De esta forma, el país buscará comenzar a incluir en su manejo de deuda la introducción de conceptos ESG, capitalizando las ventajas comparativas que el país ostenta. Esto representa una oportunidad única de posicionar al país como uno de los pioneros en la implementación de este tipo de bonos, utilizados frecuentemente en el sector corporativo, pero no el soberano. Por otra parte, sirve como señalización al mercado del compromiso que tiene la República en la lucha contra el cambio climático. 
+Dentro de los puntos fuertes que han observado las calificadoras, se encuentra la estabilidad institucional que el país tiene. Desde el respeto a la propiedad privada a la capacidad del sistema político de sentarse a dialogar para llevar adelante reformas estructurales, la confianza en la estabilidad ha sido una constante en Uruguay históricamente. Esta permite que, a largo plazo, sea menos riesgoso financiar e invertir en el país. Por otro lado, la voluntad del gobierno actual para cuadrar las cuentas fiscales en un horizonte cercano ha inclinado la balanza de las calificadoras para mantener la calificación dentro del grado inversor. Otra fortaleza vista por las agencias calificadoras, ha sido el nivel de reservas del BCU, que brinda estabilidad al sistema financiero. Como se adelantaba antes, los problemas que ha enfrentado la economía en los últimos años han sido los principales factores que las calificadoras han observado para poner en tela de duda la calificación actual. 
 
-Boitreaud , S., Gratcheva, E. M., Gurhy, B., Paladines, C., & Skarnulis, A. (2020). Riding the Wave: Navigating the ESG Landscape for Sovereign Debt Managers. Washington DC: World Bank Group.
+La calificación otorgada por FitchRatings fue BBB- con perspectiva negativa, Moody’s Baa2 con perspectiva estable y por último S&P Global Ratings. Los dictámenes se pueden encontrar siguiendo los siguientes códigos QR, al igual que una nota ampliando la importancia de mantener el grado inversor y las consecuencias de su pérdida.
 
+
+![](images/Calif.jpg)
+
+### 2.2.3 Inflación
+
+Otra variable clave a la hora de analizar la coyuntura económica del país es observar la evolución de la inflación. Hay que resaltar que la inflación en Uruguay luego de la crisis de 2002, se ha mantenido en términos generales en niveles inferiores a las dos cifras. Si uno lo analiza con una perspectiva histórica, esta inflación se encuentra en los niveles históricos más bajos de las ultimas décadas. No obstante, en términos comparativos, Uruguay tiene una inflación alta en comparación con el mundo. Para ejemplificar, en la región, Uruguay es el tercer país con la mayor inflación, solo superado por Venezuela y Argentina. 
+
+Si vemos la alineación de las cifras de inflación respecto a los objetivos de inflación impuestos por el Banco Central, encontramos que en dos ocasiones entro dentro del rango meta. Durante 2010 y de marzo de 2017 a abril del 2018, la inflación acumulada en los previos 12 meses entró dentro de los límites propuestos por el BCU.  En 2020, concretamente los meses posteriores a marzo, se observó un escalamiento en la tasa de inflación debido a la pandemia, una causa probable de esto fue el pass-through entre el tipo de cambio y la inflación.
+
+```{r Inflacion, echo=FALSE, fig.height=5, fig.width=8}
+Infl <- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "Inflacion")
+Infl_2 <- xts(x = Infl[,-1], order.by = Infl$Fecha)
+dygraphs::dygraph(Infl_2, 
+                  main = "Inflación 2010-2020",
+                  xlab="Año",
+                  ylab = "Tasa de Inflación")%>%
+              dyOptions(drawGrid = F)%>%
+              dyRangeSelector()%>%dyLegend(width = 700)
+```
+Elaboración propia en base a INE, BCU, IMF, Itaú BBA
+
+No obstante, hemos visto una retracción de la inflación, con una tendencia a que ésta entre dentro del rango meta en los próximos años. Observando el gráfico, se puede ver como tanto el IMF, los principales actores del mercado y la academia al igual que bancos de inversión extranjeros esperan que en un período menor a los dos años la inflación entre dentro del rango meta.
+
+
+### 2.2.4 Tipo de cambio USD/UYU
+
+En una economía bimonetaria como la uruguaya, una variable a analizar siempre es la cotización del par USD/UYU. El dólar en Uruguay ha sido históricamente el refugio de los individuos frente a la incertidumbre que generaban los procesos inflacionarios y las crisis económicas. Desde el punto de vista comportamental, a pesar de que en la mayoría de los casos mantener dólares no es la opción más conveniente, las personas tienen anclado en sus mentes que el dólar es un buen activo para protegerse de los eventos catastróficos. Esto también repercute en la fijación de precios de la economía uruguaya, donde los bienes de capital y ciertos bienes de consumo están denominados en dólares. Por esta razón, encontramos un fuerte pass-through entre el tipo de cambio y la inflación.
+
+Por su parte, a la hora de obtener financiamiento, muchas empresas históricamente han tenido que optar por la financiación en dólares. Esto implicaba que el riesgo asociado al descalce de moneda, fuera significativo para las empresas, pudiendo éstas pasar por una mala situación financiera ante bruscos cambios del par. La no existencia de ciertos instrumentos de cobertura para este riesgo ni de un mercado donde poder descargarlo ha sido una de las trabas para controlar este riesgo por parte de las firmas. 
+
+Analizando la evolución de los últimos 10 años de esta variable, podemos ver ciertos ciclos donde el tipo de cambio se ha movido con patrones claros. Si observamos el gráfico siguiente, podemos ver como desde mediados de 2010 a mediados de 2013 el tipo de cambio se mantuvo estable dentro de un rango cercano a los 20 pesos por dólar. Durante este período podemos observar el mínimo de la serie histórica, que comprenden estos últimos 10 años, registrado en junio de 2011 donde la par se situó en 18,311 pesos por dólar.
+
+```{r Dolar, echo=FALSE, fig.height=5, fig.width=8}
+USD <- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "USD")
+USD <- USD[,-1]
+USD_2 <- xts(x=USD[,-1], order.by = USD$Fecha)
+dygraphs::dygraph(USD_2, 
+                  main = "Cotización USD/UYU Billete 2010-2020",
+                  xlab="Año",
+                  ylab = "USD/UYU")%>%
+              dyOptions(drawGrid = F)%>%
+              dyEvent("2020-03-13", "Primer caso confirmado de Covid-19", labelLoc = "bottom")%>%
+              dyRangeSelector()%>%
+              dyLimit(as.numeric(max(USD_2$`Cotización USD Billete`)), color = "red")%>%
+              dyLimit(as.numeric(min(USD_2$`Cotización USD Billete`)), color = "green")%>%dyLegend(width = 700)
+```
+Elaboración porpia en base a BCU
+
+El segundo ciclo se puede observar desde mediados de 2013 hasta mediados de 2016, donde la economía pasó por una larga depreciación del peso uruguayo. Esta depreciación está ligada al aumento en los mercados internacionales del valor de la moneda norteamericana. El comportamiento del tipo de cambio para ese período tiene una fuerte correlación con el comportamiento del DXY en el mismo horizonte temporal, por lo que este comportamiento no fue un caso aislado en el mundo.
+
+El tercer ciclo, se caracteriza por una vuelta al estancamiento del tipo de cambio en un entorno cercano a los 28 pesos por dólar. Durante este periodo asistimos a un ciclo de apreciación de las commodities que duro desde el cuarto trimestre de 2016 al primero de 2018. Luego de este ciclo, comienza una nueva depreciación de la moneda nacional, cuya principal causa fue una política monetaria más restrictiva por parte de la reserva federal, aumentando paulatinamente la tasa de referencia. Por su parte, también en el entrono regional hubo presiones al alza del tipo de cambio producto de la inestabilidad institucional de Brasil y los problemas político-económicos de la Argentina. 
+
+El último ciclo que se observa es la repercusión en la moneda local del surgimiento del Covid-19, si se observa el gráfico, los días previos al surgimiento del primer caso confirmado de coronavirus, el tipo de cambio tuvo una depreciación exponencial. Este comportamiento se debió al tumulto generado por la pandemia que hizo depreciar las monedas de los países emergentes al procesarse un flight to quality. En esta situación hizo que el par USD/UYU experimentara su máximo histórico, situándose en 45.942 pesos por dólar.  Luego de este overshooting, la moneda estadounidense ha descendido hasta volverse a estancar en el entorno de los 43 pesos por dólar. 
+
+Tomando en cuenta las expectativas del mercado, podemos apreciar que las previsiones de los agentes tienden a que haya una pequeña depreciación. Si analizamos la última [encuesta de expectativas económicas]( https://www.bcu.gub.uy/Estadisticas-e-Indicadores/Encuesta%20de%20Expectativas%20Econmicas/iees06i0721.pdf), se espera que el tipo de cambio para diciembre de 2021 sea de 44.45 pesos por dólar, para diciembre de 2022 46.54 y para diciembre de 2023 49.28 pesos por dólar. Si vemos las previsiones de [Itaú BBA]( https://www.itau.com.br/_arquivosestaticos/itauBBA/contents/common/docs/Escenario_Macro_-_URU_0621.pdf) se espera que para finales de 2021 la par cotice a 44.50 pesos por dólar y a finales de 2022 este a 46.25 pesos por dólar. No obstante, la emisión en pesos realizada en junio de 2021, por su parte nos muestra expectativas a la apreciación del tipo de cambio. Una mejora en los precios internacionales, al igual que una posible recuperación económica rápida son posibles drivers para que se materialice un escenario de apreciación del peso uruguayo.
+
+
+### 2.2.5 UI/UYU y UP/UYU
+
+La introducción de la unidad indexada a mediados de la década de los 2000, marco un hito en la posibilidad para las empresas de poder financiarse en una unidad de cuenta que tuviera un mejor calce con sus ingresos. Esta unidad de cuenta, permite cubrir la pérdida de poder de compra como consecuencia de la inflación mediante los ajustes diarios planteados por la [metodología utilizada](https://www.ine.gub.uy/web/guest/ipc-indice-de-precios-del-consumo/-/asset_publisher/ddWrDpxj9ogb/content/metodologia-de-la-unidad-indexada-ui-/maximized?_101_INSTANCE_ddWrDpxj9ogb_redirect=%2Fweb%2Fguest%2Fipc-indice-de-precios-del-consumo). Como se puede observar en la gráfica el comportamiento durante el período fue prácticamente lineal. 
+
+```{r UI, echo=FALSE, fig.height=2.5, fig.width=8}
+UI <- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "UI")
+UI <- UI[,-1]
+UI_2 <- xts(x=UI[,-1], order.by = UI$Fecha)
+dygraphs::dygraph(UI_2, 
+                  main = "Cotización Unidad Indexada 2010-2020",
+                  xlab="Año",
+                  ylab = "UI/UYU")%>%
+              dyOptions(drawGrid = F)%>%dyLegend(width = 700)
+```
+Elaboración propia en base a INE
+
+Por otra parte, se creo una nueva unidad de cuenta llamada Unidad Previsional, que en su [metodología](https://www.ine.gub.uy/unidad-previsional ) de ajuste sigue el Índice Medio de Salarios Nominales. Si analizamos el siguiente gráfico podemos ver que desde su introducción a la fecha ha seguido una tendencia lineal con algunos saltos, que corresponden a la variación del IMSN.
+
+```{r Up, echo=FALSE, fig.height=2.5, fig.width=8}
+UP <- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "UP")
+UP <- UP[,-1]
+UP_2 <- xts(x=UP[,-1], order.by = UP$Fecha)
+dygraphs::dygraph(UP_2, 
+                  main = "Cotización Unidad Previsional 2010-2020",
+                  xlab="Año",
+                  ylab = "UP/UYU")%>%
+              dyOptions(drawGrid = F)%>%dyLegend(width = 700)
+```
+Elaboración propia en base a INE
+
+
+## 3. Mercado de Valores en Uruguay
+
+Es imposible disociar la historia del país con la historia de su mercado financiero. Desde la creación de Sociedad Bolsa Montevideana, progenitora de la actual Bolsa de Valores de Montevideo en el siglo XIX, Uruguay ha contado con un lugar donde realizar el intercambio de las operaciones bursátiles. Las vicisitudes de le economía uruguaya han impactado fuertemente el nivel de operativa. En épocas de crecimiento, la bolsa ha visto florecer miles de transacciones que ayudaron a financiar a empresas que luego se convertirían en baluartes de la economía en su momento. Como suele suceder al comienzo, gran parte de la operativa se centraba en títulos de deuda pública, que al ser más seguros generan confianza en los inversores. La operativa poco a poco fue cambiando, y a mediados del siglo XX 45 empresas cotizaban en bolsa. No obstante, los años de alta inflación, la destrucción del valor de la moneda, las crisis provocadas por los desequilibrios, generaron una caída fuerte en la actividad bursátil. 
+
+El acercamiento al nuevo siglo trajo aparejado cambios y nuevos jugadores al mercado. La creación de la Bolsa Electrónica de Valores (BEVSA), fue un hito en el avance tecnológico en el mercado bursátil local. La aparición de las AFAP, la promulgación de la Ley del Mercado de Valores y Obligaciones Negociables generó un nuevo impulso a la operativa, ya que empresas que antes no se financiaban mediante la bolsa, pudieron volver a hacerlo. Esto generó un aumento en la operativa bursátil durante dichos años, que ha ido acompañando a la evolución de la economía nacional, aunque nunca recuperando el esplendor de los años dorados.
+
+Para este análisis he decidido enfocarme en la operativa de los últimos 10 años, como forma de tener un marco temporal que sea similar a lo esperable en los próximos 5 años. Es por ello que los siguientes párrafos se centraran en el estudio descriptivo sobre como ha evolucionado la operativa bursátil en nuestro país, distinguiendo por tipo de mercado y producto.
+
+### 3.1 Analisis de la Operativa para el período 2010-2020
+
+Observando la siguiente tabla, podemos apreciar los montos de la operativa del mercado bursátil en Uruguay durante el período que va desde 2010 a 2020. La media de la operativa en los 3 mercados se situó en aproximadamente 36.000 millones de dólares, teniendo su máxima operativa en 2018 totalizándose aproximadamente 52.500 millones de dólares. En términos de desviación desde la media, el desvío estándar de la operativa total fue de aproximadamente de 9.000 millones de dólares. 
+
+Total Operado en el Mercado de Valores Uruguayo 2010-2020 (millones de dólares)
+```{r Operativa mercado, echo=FALSE, fig.height=5, fig.width=8}
+a <- as.data.frame(t(Operativa))
+colnames(a) <- unique(Operativa$Year)
+a <- a[-1,]
+#DT::datatable(a,
+#              caption = "Total Operado en el Mercado de Valores Uruguayo 2010-2020 (cifras en millones de dólares)",
+#              extensions = "Buttons",
+#              options=list(dom = 'Bfrtip', buttons = c('copy', 'csv', 'excel')))
+knitr::kable(a)
+```
+Fuente: BCU
+
+Como se puede apreciar en el gráfico siguiente, el principal operador en el mercado bursátil local es la Bolsa Electrónica de Valores, con aproximadamente el 65% del mercado, seguido por la operativa over the counter cercana al 30%, mientras que la Bolsa de Valores de Montevideo tiene un 5% de participación en el mercado. En términos monetarios, el promedio para el periodo analizado de la operativa de BEVSA es de aproximadamente 24.500 millones de dólares. Por su parte la de la BVM es cercana a 830 millones de dólares y la operativa OTC a los 11.250 millones de dólares.
+
+```{r operativa por bolsa, echo=FALSE, fig.height=5, fig.width=8}
+b <- Operativa
+b$total <- b$`Operado BVM`+b$`Operado Bevsa`+b$Extrabursatil
+for(i in 1:ncol(b)) {if(i>1){ b[,i ]<- round(b[ ,i]/b[,ncol(b)], 4)}}
+BVM<- b%>%select(Year,`Operado BVM`)%>%mutate(Bolsa="BVM")
+colnames(BVM) <- c("Year", "Porcentaje", "Bolsa")
+BEVSA<- b%>%select(Year,`Operado Bevsa`)%>%mutate(Bolsa="BEVSA")
+colnames(BEVSA) <- c("Year", "Porcentaje", "Bolsa")
+Ext <- b%>%select(Year,Extrabursatil)%>%mutate(Bolsa="Extrabursatil")
+colnames(Ext) <- c("Year", "Porcentaje", "Bolsa")
+Op <- rbind(BVM, BEVSA, Ext)
+Op$Porcentaje <- Op$Porcentaje*100
+op_2 <- ggplot(Op, aes(x = Year, y = Porcentaje, fill = Bolsa)) + 
+  geom_bar(stat = "identity")+
+  scale_fill_brewer(palette = "Blues")+
+  scale_x_continuous(breaks = c(year_inicio:year_final))+
+  scale_y_continuous(breaks = seq(0,100,10))+
+  theme_classic()+
+  theme(legend.position = "bottom")+
+  labs(title="Operativa por bolsa transada",
+       subtitle = "Por bolsa transada y tipo de titulo transado",
+       x="Año",
+       y="Porcentaje sobre total operado",
+       fill="Bolsa",
+       caption = c("Elaboración propia en base a datos del BCU"))+
+  coord_flip()
+ggplotly(op_2)
+```
+
+Elaboración propia en base a BCU
+
+Si graficamos los montos operados respecto al tiempo, podemos observar claramente una fuerte correlación entre la operativa de BEVSA con la operativa over the counter. Como era de esperar, la operativa de la BVM se encuentra cercana al eje de las abscisas debido a su bajo volumen. Como se puede apreciar en las líneas anteriores, la operativa bursátil uruguaya tiene un volumen relativamente bajo si se compara con la región. Si analizamos por ejemplo el volumen transado por la Bolsa de Valores de Sao Paulo en 2015, esta se situó en 1.543 billones de dólares.  
+
+```{r operativa grafico, echo=FALSE, fig.height=2.6, fig.width=8}
+dygraphs::dygraph(Operativa, main = "Operativa del Mercado de Valores Uruguayo 2010-2020", xlab = "Año", ylab = "Millones de Dolares")%>% dyOptions(drawGrid = F)%>%dyLegend(width = 700)
+```
+Elaboración propia en base a BCU
+
+Si ponemos foco en la tasa de variación de la operativa, en los últimos 10 años ésta tuvo un crecimiento de 63%. No obstante, ha tenido fuerte fluctuaciones durante el período, pasando en algunos casos por un fuerte retraimiento. Esta variación puede ser explicada por un cúmulo de factores, por ejemplo, la poca profundidad del mercado, la performance de la economía uruguaya y una deficiente educación financiera que no encauza parte de los ahorros de la economía a este sector. 
+
+```{r Operativa por mercado, echo=FALSE, fig.height=5, fig.width=8}
+OP_M <- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "OP")
+OP_M$Porcentaje <- round(OP_M$Porcentaje*100,2)
+op3 <- ggplot(OP_M, aes(x = Year, y = Porcentaje, fill = Mercado)) + 
+  geom_bar(stat = "identity")+
+  scale_fill_brewer(palette = "Blues")+
+  scale_x_continuous(breaks = c(year_inicio:year_final))+
+  scale_y_continuous(breaks = seq(0,100,10))+
+  theme_classic()+
+  theme(legend.position = "bottom")+
+  labs(title="Operativa por mercado transado",
+       subtitle = "Por bolsa transada y tipo de titulo transado",
+       x="Año",
+       y="Porcentaje sobre total operado",
+       fill="Mercado",
+       caption = c("Elaboración propia en base a datos del BCU"))+
+  coord_flip()
+ggplotly(op3)
+```
+Elaboración propia en base a BCU
+
+Si analizamos el mercado en el que se transan los distintos tipos de activos, se puede extraer una insight relevante, la mayoría de los títulos operados se transan en el mercado primario, por lo que la estrategia dominante en el mercado es buy and hold. Como se puede apreciar en el gráfico anterior, la operativa en el mercado primario supone cerca del 65% de la operativa total del mercado en los últimos años. Por dicha razón, conviene analizar con la información disponible en la página del BCU cuales son los instrumentos y los sectores que están activos en los segmentos del mercado.
+
+### 3.1.1 Análisis del Mercado Primario
+
+Analizando el comportamiento del mercado primario en Uruguay durante la última década, podemos extraer que la operativa promedio fue de aproximadamente 29.000 millones de dólares. Si analizamos como ha sido la evolución en esta década, podemos apreciar en el gráfico siguiente como la operativa del mercado primario distinguiendo títulos públicos y privados ha sido bastante similar. El crecimiento acumulado de la operativa ha sido de 43% en la última década. No obstante, ha tenido fuerte fluctuaciones como se puede apreciar en el gráfico.
+
+```{r mercado primario op  , echo=FALSE, fig.height=3, fig.width=8}
+Mercado_primario$Publico <- Mercado_primario$BVM_P+Mercado_primario$BEVSA_P+Mercado_primario$Extrabursatil_P
+Mercado_primario$Privado <- Mercado_primario$BVM_Pr+Mercado_primario$BEVSA_Pr+Mercado_primario$Extrabursatil_Pr
+Mercado_primario$Total <- Mercado_primario$Publico+Mercado_primario$Privado
+a <- as.data.frame(t(Mercado_primario))
+colnames(a) <- unique(Mercado_primario$Year)
+a <- a[-1,]
+a <- a[c(1,2,3,7,4,5,6,8,9),]
+Mercado_primario_2 <- Mercado_primario[,c(1,8,9,10) ]
+dygraphs::dygraph(Mercado_primario_2, 
+                  main = "Operativa Mercado Primario",
+                  xlab="Año",
+                  ylab = "Millones de dólares")%>%
+              dyOptions(drawGrid = F)%>%dyLegend(width = 700)
+```
+Elaboración propia en base a BCU
+
+Si vemos como se distribuye la operativa primaria dentro de los mercados encontramos que BEVSA es el ambiente donde se tranzan la mayoría de los títulos del sector privado en su primera transacción. Si se observa detenidamente el siguiente gráfico podemos ver que existió un cambio en la operativa de los títulos del sector público, pasándose de transarse principalmente en BEVSA a transarse en la operativa extrabursátil. En términos del sector de los títulos transados, el porcentaje de títulos transados del sector público y privado se asemejan en volumen.
+
+```{r Mercado primario relativo,echo=FALSE,fig.height=5, fig.width=8}
+Mer_prim_rel <- Mercado_primario
+for(i in 1:ncol(Mer_prim_rel)) {if(i>1){ Mer_prim_rel[,i ]<- round(Mer_prim_rel[ ,i]/Mer_prim_rel[,ncol(Mer_prim_rel)], 4)}}
+BVM_P<- Mer_prim_rel%>%select(Year, BVM_P)%>%mutate(Bolsa="BVM", Sector="Publico")
+colnames(BVM_P) <- c("Year", "Porcentaje", "Bolsa", "Sector")
+```
+
+
+```{r mercado primario por bolsa y sector, echo=FALSE, fig.height=5, fig.width=8}
+BVM_Pr <- Mer_prim_rel%>%select(Year, BVM_Pr)%>%mutate(Bolsa="BVM", Sector="Privado")
+colnames(BVM_Pr) <- c("Year", "Porcentaje", "Bolsa", "Sector")
+BEVSA_P <- Mer_prim_rel%>%select(Year, BEVSA_P)%>%mutate(Bolsa="BEVSA", Sector="Publico")
+colnames(BEVSA_P) <- c("Year", "Porcentaje", "Bolsa", "Sector")
+BEVSA_Pr <- Mer_prim_rel%>%select(Year, BEVSA_Pr)%>%mutate(Bolsa="BEVSA", Sector="Privado")
+colnames(BEVSA_Pr) <- c("Year", "Porcentaje", "Bolsa", "Sector")
+Extr_P <- Mer_prim_rel%>%select(Year, Extrabursatil_P)%>%mutate(Bolsa="Extrabursatil", Sector="Publico")
+colnames(Extr_P) <- c("Year", "Porcentaje", "Bolsa", "Sector")
+Extr_Pr <- Mer_prim_rel%>%select(Year, Extrabursatil_Pr)%>%mutate(Bolsa="Extrabursatil", Sector="Privado")
+colnames(Extr_Pr) <- c("Year", "Porcentaje", "Bolsa", "Sector")
+M_P_H <- rbind(BVM_P,BVM_Pr, BEVSA_P, BEVSA_Pr, Extr_P, Extr_Pr )
+M_P_H$Porcentaje <- M_P_H$Porcentaje*100
+M_P_H$Titulo <- paste(M_P_H$Bolsa, M_P_H$Sector, sep="_")
+lala <- ggplot(M_P_H, aes(x = Year, y = Porcentaje, fill = Titulo)) + 
+  geom_bar(stat = "identity")+
+  scale_fill_brewer(palette = "Blues")+
+  scale_x_continuous(breaks = c(year_inicio:year_final))+
+  scale_y_continuous(breaks = seq(0,100,10))+
+  theme_classic()+
+  theme(legend.position = "bottom")+
+  labs(title="Mercado Primario,por tipo de titulo y bolsa transada",
+       subtitle = "Por bolsa transada y tipo de titulo transado",
+       x="Año",
+       y="Porcentaje sobre mercado primario",
+       fill="Bolsa/Tipo de Titulo",
+       caption = c("Elaboración propia en base a datos del BCU"))+
+  coord_flip()
+ggplotly(lala, tooltip = "all")
+```
+Elaboración propia en base a BCU
+
+Por último, analizando la operativa del mercado primario por instrumento transado, podemos observar en el siguiente gráfico que históricamente los principales instrumentos transados son los distintos instrumentos emitidos por el Banco central del Uruguay (Letras de regulación monetaria y letras de tesorería) y los certificados de depósitos emitidos por entidades financieras del sector privado. 
+
+```{r Grafico mercado primario, echo=FALSE, fig.height=5, fig.width=8}
+M_P_ins <- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "M_P_ins")
+MPI_1<- M_P_ins%>%select(Year, `Intrumentos BCU`) %>%mutate(Ins="Instrumentos BCU")
+colnames(MPI_1) <- c("Year", "Porcentaje", "Instrumento")
+MPI_2<- M_P_ins%>%select(Year, `CDS BROU`) %>%mutate(Ins="CD BROU")
+colnames(MPI_2) <- c("Year", "Porcentaje", "Instrumento")
+MPI_3<- M_P_ins%>%select(Year, `ONs y FF`) %>%mutate(Ins="ONs y FF")
+colnames(MPI_3) <- c("Year", "Porcentaje", "Instrumento")
+MPI_4<- M_P_ins%>%select(Year, `CDS Privados`) %>%mutate(Ins="CD Privados")
+colnames(MPI_4) <- c("Year", "Porcentaje", "Instrumento")
+MPI_5<- M_P_ins%>%select(Year, Forwards) %>%mutate(Ins="Forwards")
+colnames(MPI_5) <- c("Year", "Porcentaje", "Instrumento")
+MPI_6<- M_P_ins%>%select(Year, Otros) %>%mutate(Ins="Otros")
+colnames(MPI_6) <- c("Year", "Porcentaje", "Instrumento")
+MPI_7<- M_P_ins%>%select(Year, NDF) %>%mutate(Ins="NDF")
+colnames(MPI_7) <- c("Year", "Porcentaje", "Instrumento")
+MPI_8<- M_P_ins%>%select(Year, `Emisiones internacionales`) %>%mutate(Ins="Emisiones internacionales")
+colnames(MPI_8) <- c("Year", "Porcentaje", "Instrumento")
+MPI_9<- M_P_ins%>%select(Year, `Notas en UI`) %>%mutate(Ins="Notas en UI")
+colnames(MPI_9) <- c("Year", "Porcentaje", "Instrumento")
+MPI <- rbind(MPI_1,MPI_2,MPI_3,MPI_4,MPI_5,MPI_6,MPI_7,MPI_8,MPI_9)
+MPI$Porcentaje <- MPI$Porcentaje*100
+lala <- ggplot(MPI, aes(x = Year, y = Porcentaje, fill = Instrumento)) + 
+  geom_bar(stat = "identity", color="skyblue")+
+  scale_fill_brewer(palette = "Blues")+
+  scale_x_continuous(breaks = c(year_inicio:year_final))+
+  scale_y_continuous(breaks = seq(0,100,10))+
+  theme_classic()+
+  theme(legend.position = "bottom")+
+  labs(title="Mercado primario por tipo de instrumento negociado",
+       subtitle = "Por bolsa transada y tipo de titulo transado",
+       x="Año",
+       y="Porcentaje sobre mercado primario",
+       fill="Instrumento",
+       caption = c("Elaboración propia en base a datos del BCU"))+
+  coord_flip()
+ggplotly(lala, tooltip = "all")
+```
+Elaboración propia en base a BCU
+
+### 3.1.2 Análisis del Mercado Secundario
+
+El mercado secundario en la última década tuvo una operativa promedio de aproximadamente 7800 millones de dólares, con una desviación estándar de aproximadamente 4300 millones de dólares. Si analizamos como ha sido la evolución de la operativa estos últimos 10 años, se puede apreciar en el gráfico siguiente que el comportamiento del mercado secundario está fuertemente correlacionado con las transacciones de títulos públicos, siendo estos casi de la misma cuantía que la operativa total en el período. No obstante, es necesario recalcar que, en 2019, los valores extranjeros tuvieron un aumento considerable en la operativa del mercado secundario. 
+
+```{r Operativa mercado secundario, echo=FALSE,fig.width=8, fig.height=3 }
+Mercado_secundario <-read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "Mercado_secundario")
+Mercado_secundario$Publico <- Mercado_secundario$BVM_P+Mercado_secundario$BEVSA_P+Mercado_secundario$Extrabursatil_P
+Mercado_secundario$Privado <- Mercado_secundario$BVM_Pr+Mercado_secundario$BEVSA_Pr+Mercado_secundario$Extrabursatil_Pr
+Mercado_secundario$Extranjero <- Mercado_secundario$BVM_Ex+Mercado_secundario$BEVSA_Ex+Mercado_secundario$Extrabursatil_Ex
+Mercado_secundario$Total <- Mercado_secundario$Publico+Mercado_secundario$Privado+Mercado_secundario$Extranjero
+Mercado_sec_2 <- Mercado_secundario[,c(1,11:14)]
+dygraphs::dygraph(Mercado_sec_2, 
+                  main = "Operativa Mercado Secundario",
+                  xlab="Año",
+                  ylab = "Millones de dólares")%>%
+              dyOptions(drawGrid = F)%>%dyLegend(width = 700)
+```
+Elaboración propia en base a BCU
+
+Por otro lado, el comportamiento del mercado secundario, tiene una fuerte correlación respecto al mercado primario, observándose un comportamiento similar. Respecto a la tasa de crecimiento durante el período, esta fue de 185% si comparamos las cifras de 2010 con la de 2020. Esta tasa se ve fuertemente influenciada por la baja operativa del mercado secundario en los primeros años del período.
+
+Como habíamos adelantado anteriormente, la principal operativa del mercado secundario en la transacción de valores públicos. Si analizamos cual es la institución que lleva adelante la mayoría de estas operaciones, BEVSA es el jugador preponderante en el mercado. Por su parte, también se puede observar como existió un cambio, dado que a inicio de la década la BVM tenia una mayor participación en este mercado, que se fue diluyendo a medida que nos acercamos a 2020.  Por su parte las transacciones de valores extranjeros se centran mayormente en BEVSA también. 
+
+```{r mercado secundario relativo, echo=FALSE, fig.height=5, fig.width=8}
+Mer_s_rel <- Mercado_secundario
+for(i in 1:ncol(Mer_s_rel)) {if(i>1){ Mer_s_rel[,i ]<- round(Mer_s_rel[ ,i]/Mer_s_rel[,ncol(Mer_s_rel)], 4)}}
+BVM_P<- Mer_s_rel%>%select(Year, BVM_P)%>%mutate(Bolsa="BVM", Sector="Publico")
+colnames(BVM_P) <- c("Year", "Porcentaje", "Bolsa", "Sector")
+BVM_Pr <- Mer_s_rel%>%select(Year, BVM_Pr)%>%mutate(Bolsa="BVM", Sector="Privado")
+colnames(BVM_Pr) <- c("Year", "Porcentaje", "Bolsa", "Sector")
+BVM_ex <- Mer_s_rel%>%select(Year, BVM_Ex)%>%mutate(Bolsa="BVM", Sector="Extranjero")
+colnames(BVM_ex) <- c("Year", "Porcentaje", "Bolsa", "Sector")
+BEVSA_P <- Mer_s_rel%>%select(Year, BEVSA_P)%>%mutate(Bolsa="BEVSA", Sector="Publico")
+colnames(BEVSA_P) <- c("Year", "Porcentaje", "Bolsa", "Sector")
+BEVSA_Pr <- Mer_s_rel%>%select(Year, BEVSA_Pr)%>%mutate(Bolsa="BEVSA", Sector="Privado")
+colnames(BEVSA_Pr) <- c("Year", "Porcentaje", "Bolsa", "Sector")
+BEVSA_ex <- Mer_s_rel%>%select(Year, BEVSA_Ex)%>%mutate(Bolsa="BEVSA", Sector="Extranjero")
+colnames(BEVSA_ex) <- c("Year", "Porcentaje", "Bolsa", "Sector")
+Extr_P <- Mer_s_rel%>%select(Year, Extrabursatil_P)%>%mutate(Bolsa="Extrabursatil", Sector="Publico")
+colnames(Extr_P) <- c("Year", "Porcentaje", "Bolsa", "Sector")
+Extr_Pr <- Mer_s_rel%>%select(Year, Extrabursatil_Pr)%>%mutate(Bolsa="Extrabursatil", Sector="Privado")
+colnames(Extr_Pr) <- c("Year", "Porcentaje", "Bolsa", "Sector")
+Extr_ex <- Mer_s_rel%>%select(Year, Extrabursatil_Ex)%>%mutate(Bolsa="Extrabursatil", Sector="Extranjero")
+colnames(Extr_ex) <- c("Year", "Porcentaje", "Bolsa", "Sector")
+MSH <- rbind(BVM_P, BVM_Pr,BVM_ex, BEVSA_P, BEVSA_Pr, BEVSA_ex, Extr_P, Extr_Pr, Extr_ex)
+MSH$Porcentaje <- MSH$Porcentaje*100
+MSH$Titulo <- paste(MSH$Bolsa, MSH$Sector, sep="_")
+msh <- ggplot(MSH, aes(x = Year, y = Porcentaje, fill = Titulo)) + 
+  geom_bar(stat = "identity", color="skyblue")+
+  scale_fill_brewer(palette = "Blues")+
+  scale_x_continuous(breaks = c(year_inicio:year_final))+
+  scale_y_continuous(breaks = seq(0,100,10))+
+  theme_classic()+
+  theme(legend.position = "bottom")+
+  labs(title="Operativa por bolsa transada",
+       subtitle = "Por bolsa transada y tipo de titulo transado",
+       x="Año",
+       y="Porcentaje sobre mercado secundario",
+       fill="Bolsa",
+       caption = c("Elaboración propia en base a datos del BCU"))+
+  coord_flip()
+ggplotly(msh)
+```
+Elaboración propia en base a BCU
+
+Si nos centramos en el tipo de activo negociado, en el siguiente gráfico podremos observa la relevancia relativa de cada tipo de instrumento en el mercado secundario. El principal activo negociado ha sido históricamente instrumentos emitidos por el BCU, concretamente letras de regulación monetaria y letras de tesorería. Por otro lado, las notas en Unidades Indexadas ha sido otro instrumento relevante en el volumen transado en el mercado secundario. Por su parte la transacción de emisiones internacionales se ha retraído respecto a los valores de principio de la década.
+
+```{r Grafico mercado secundario, echo=FALSE, fig.height=5, fig.width=8}
+M_S_ins <- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "M_S_ins")
+MSI_1<- M_S_ins%>%select(Year, `Bonos locales` ) %>%mutate(Ins="Bonos Locales")
+colnames(MSI_1) <- c("Year", "Porcentaje", "Instrumento")
+MSI_2<- M_S_ins%>%select(Year, `Emisiones internacionales`) %>%mutate(Ins="Emisiones internacionales")
+colnames(MSI_2) <- c("Year", "Porcentaje", "Instrumento")
+MSI_3<- M_S_ins%>%select(Year, `Letras de Tesoreria/LRM`) %>%mutate(Ins="Letras de Tesoreria/LRM")
+colnames(MSI_3) <- c("Year", "Porcentaje", "Instrumento")
+MSI_4<- M_S_ins%>%select(Year, `Nota en UI`) %>%mutate(Ins="Notas en UI")
+colnames(MSI_4) <- c("Year", "Porcentaje", "Instrumento")
+MSI_7<- M_S_ins%>%select(Year, `Valores extranjeros`) %>%mutate(Ins="Valores Extranjeros")
+colnames(MSI_7) <- c("Year", "Porcentaje", "Instrumento")
+MSI_8<- M_S_ins%>%select(Year, `Otros valores`) %>%mutate(Ins="Otros valores")
+colnames(MSI_8) <- c("Year", "Porcentaje", "Instrumento")
+MSI_9<- M_S_ins%>%select(Year, `Notas multilaterales`) %>%mutate(Ins="NNotas multilaterales")
+colnames(MSI_9) <- c("Year", "Porcentaje", "Instrumento")
+MSI <- rbind(MSI_1,MSI_2,MSI_3,MSI_4,MSI_7,MSI_8,MSI_9)
+MSI$Porcentaje <- MSI$Porcentaje*100
+lala <- ggplot(MSI, aes(x = Year, y = Porcentaje, fill = Instrumento)) + 
+  geom_bar(stat = "identity")+
+  scale_fill_brewer(palette = "Blues")+
+  scale_x_continuous(breaks = c(year_inicio:year_final))+
+  scale_y_continuous(breaks = seq(0,100,10))+
+  theme_classic()+
+  theme(legend.position = "bottom")+
+  labs(title="Mercado secundario por tipo de instrumento negociado",
+       subtitle = "Por bolsa transada y tipo de titulo transado",
+       x="Año",
+       y="Porcentaje sobre mercado secundario",
+       fill="Instrumento",
+       caption = c("Elaboración propia en base a datos del BCU"))+
+  coord_flip()
+ggplotly(lala, tooltip = "all")
+```
+Elaboración propia en base a BCU
+
+
+No es de extrañarnos volúmenes tan bajos en la operativa del mercado secundario, debido a la estrategia buy and hold que tiene la mayoría de los inversores locales, por lo que rara vez se desprenden de los activos hasta su vencimiento. 
+
+### 3.3 Renta Variable nacional, Fideicomisos Financieros y Obligaciones Negociables
+
+Como pudimos extraer del análisis anterior, la mayor parte de la operativa del mercado primario y secundario, se centra en títulos de renta fija. Como se podrá recordar a mediados del siglo XX existían 45 empresas que cotizaban sus acciones en la bolsa. A fecha de este informe, las empresas que [cotizan en bolsa ascienden a 7]( https://www.bvm.com.uy/operadores/emisores-de-acciones), estando listadas todas ellas en la Bolsa de Valores de Montevideo. Si analizamos como ha sido la operativa en el mercado de renta variable en Uruguay en los últimos 10 años, nos encontramos con un panorama francamente desolador. El promedio de las transacciones en renta variable los últimos 10 años ha sido de solamente 4.5 millones de dólares, con una desviación estándar de 2.4 millones de dólares. Como se puede apreciar en el siguiente gráfico, si bien hubo un comportamiento al alza en el período analizado, estos han sido por montos realmente bajos. 
+
+
+```{r renta variable, echo=FALSE, fig.height=3, fig.width=8}
+Renta_variable <- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "Renta_variable")
+dygraphs::dygraph(Renta_variable, 
+                  main = "Volumen operado de Renta Variable 2010-2020",
+                  xlab="Año",
+                  ylab = "Millones de dólares")%>%
+              dyOptions(drawGrid = F)%>%dyLegend(width = 700)
+```
+Elaboración propia en base a BCU
+
+Esta tendencia en la baja operativa en renta variable, ha sido una constante durante por lo menos cuatro décadas. La preponderancia de las obligaciones negociables como forma de financiarse, quizás sea una de las razones principales para que no se hayan generado nuevas IPO en las últimas décadas. Por su parte, en la actualidad hemos visto como una empresa uruguaya ha salido en bolsa en NASDAQ, cabe preguntarnos si ésta no sería una fuente de financiamiento utilizada más frecuentemente por las empresas uruguayas de no ser por la poca profundidad del mercado local. 
+
+Si analizamos la constitución de fideicomisos financieros, la última década trajo aparejado un monto promedio de 210 millones de dólares de fideicomisos constituídos anualmente, con una desviación respecto a la media de 73 millones de dólares. Si observamos el gráfico, podemos ver como ésta ha sido relativamente estable a partir de 2013, siguiendo la dinámica del mercado en general.
+
+```{r fideicomisos constituidos, echo=FALSE, fig.height=3, fig.width=8}
+F_financiero<- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "Fideico_financiero")
+dygraphs::dygraph(F_financiero, 
+                  main = "Fideicomisos financieros constituidos 2010-2020",
+                  xlab="Año",
+                  ylab = "Millones de dólares")%>%
+              dyOptions(drawGrid = F)%>%dyLegend(width = 700)
+```
+Elaboración propia en base a BCU
+
+
+Por último, para finalizar este análisis nos centraremos en observar cual ha sido la dinámica en la emisión de obligaciones negociables en la última década. Como podemos observar en el siguiente gráfico, se puede apreciar una pérdida de dinamismo en la emisión de ONs en el último lustro del período analizado. Esto se debe a un retraimiento de la emisión de ONs por parte de las empresas del sector público, lo cual ha generado una retracción en los montos emitidos. 
+
+
+```{r on, echo=FALSE, fig.height=3, fig.width=8}
+O_N<- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "Obl_negociables")
+dygraphs::dygraph(O_N, 
+                  main = "Obligaciones negociables emitidas",
+                  xlab="Año",
+                  ylab = "Millones de dólares")%>%
+              dyOptions(drawGrid = F)%>%dyLegend(width = 700)
+```
+Elaboración propia en base a BCU
+
+## 4. Perspectivas del Mercado de Valores en Uruguay
+
+La necesidad de un mercado de valores que sea dinámico y fácil de acceder para los distintos agentes de la economía, va más allá de un simple capricho de algunos, es un requisito necesario mas no suficiente para un mayor dinamismo en la economía. La posibilidad de que agentes superavitarios puedan financiar a agentes que necesitan ser financiados mediante el canal bursátil, genera un efecto derramamiento en la economía. Este derramamiento, provoca mejores tasas de crecimiento y un mayor dinamismo de la economía, lo cual impactaría en uno de los principales problemas que aqueja a la economía nacional, el desempleo. Por su parte, el financiamiento bursátil puede tener un horizonte temporal mayor al que vemos en el canal bancario, lo cual ayudaría a los financiados llevar a cabo inversiones de largo aliento sin generar un descalce de plazos, bajando así el riesgo del proyecto.
+
+En las últimas décadas, Uruguay ha visto un retraimiento de la actividad del mercado de valores local, en un mundo que cada vez utiliza este medio para generar valor. No es un fenómeno con una única causa concreta, que se pueda atacar y resolver en un horizonte de corto plazo, sino uno multicausal. La desaparición de empresas claves que fueron pioneras en el mercado de valores has sido un golpe duro a la operativa. Un claro caso de esto es FANAPEL, la cual fue una de aquellas empresas en cotizar sus acciones en la bolsa a mediados del siglo pasado, y que fue pionera en la emisión de Obligaciones Negociables como forma de acceder a financiamiento de largo plazo durante la administración del Cr. Ricardo Zerbino. La proliferación de algunos fraudes que minaron la confianza de las personas en ciertos tipos de activos. La idiosincrasia en las decisiones de ahorro e inversión por parte del uruguayo promedio, ahorrar en dólares a la vista o comprar activos inmobiliarios para su posterior renta. Estos factores enumerados anteriormente pueden ser parte de las causas por las que no hemos podido volver a tener un mercado de valores dinámico en Uruguay.
+
+En la actualidad, a impulso del actual gobierno, se ha vuelto a lanzar la Comisión de Promoción del Mercado de Valores como forma de intentar generar un plan de trabajo que permita devolverle el dinamismo de los años dorados al igual que profundizar el desarrollo del mercado de valores en Uruguay. Con un espaldarazo político fuerte, se encargó a Alberto Estrada ponerse al frente de dicha comisión. 
+
+En una entrevista realizada por la Ec. Barbara Mainzer en el marco de una actividad realizada por la CFA Society Uruguay, Estrada subrayó cuatro puntos por los que ser optimistas ante la tarea encomendada a la comisión. El primero el enorme apoyo político que se ha recibido por parte de instituciones claves como el Ministerio de Economía y Finanzas y el Banco central del Uruguay. En segunda instancia el optimismo por parte de los agentes del mercado y la predisposición a desarrollar planes de acción, que han demostrado en diversas reuniones mantenidas. En tercer lugar, el regulador está en concordancia con la necesidad de desarrollar el mercado de valores, y ha presentado alguna propuesta que va en esta dirección. Por último, la instauración de un liderazgo claro en la comisión, en la que tanto él como el Dr. Herman Kamil tiene la misión de llevar a buen puerto el desarrollo del mercado nacional de valores.
+
+En este sentido se han creado varios grupos de trabajo, los cuales se han centrado en tres temas principalmente. El primero en el estudio sobre la aplicabilidad de fondos comunes de inversión, dado que a nivel global han probado ser vehículos de inversión que permiten a los pequeños inversores acceder a volúmenes y precios que sólo pueden acceder inversores mayoristas.
+
+Por otro lado, se formó un grupo de trabajo que estudia los límites de inversión de las Administradoras de Fondos de Pensión, donde se busca emular ciertas experiencias exitosas a nivel mundial para poder mejorar el actual sistema. Por último, se formó un grupo de trabajo para analizar y mejorar el proceso de oferta pública que hoy existe en Uruguay. En este sentido se busca implementar un sistema en que las empresas de menor porte puedan acceder a financiamiento mediante el mercado de valores, como forma de dinamizar la economía. 
+
+Por otra parte, la inminencia de un cambio generacional en la dirección de las empresas, al igual que la proliferación en los jóvenes del conocimiento de distintos activos en los que se es plausible invertir, sin dudas será un espaldarazo para que si se intenta el mercado bursátil uruguayo logre un mayor desarrollo. Pero para ello se deben crear instrumentos que permitan encauzar el ahorro hacia la bolsa. Hoy día, los costos de mantenimiento de cuentas, fees y cargos hacen virtualmente imposible que pequeños ahorristas puedan acceder a invertir en distintos activos, lo cual es una fuerte traba a la posibilidad de desarrollar un mercado. La insuficiente cantidad y diversidad de fondos mutuos que permitan a los uruguayos acceder a estrategias de diversificación de riesgo y optimización a un costo bajo es otra gran limitante a la hora de acercar a “los de a pie” al mercado. Una reforma que no contemple estos puntos, estará destinada al fracaso. La necesidad de sinergia por parte del sector privado y público serán claves para poder llegar a los objetivos planteados.
+
+El Profesor Pascale siempre nos comenta en sus clases, que el Uruguay es un país de diagnósticos, que nos pasamos diagnosticando y llenando hojas con estos. Leyendo su último libro, “Del Freno al Impulso”, uno empieza a entender que es necesario pasar del diagnóstico a la acción para poder cambiar el presente y mejorar el futuro. En mi opinión, es hora de plantearse hacer lo mismo con el mercado de valores en Uruguay, pasar a la acción con una hoja de ruta que nos permita con pequeños pasitos llegar a desarrollar el mercado. Si esto se plasma en la realidad, es posible ver con optimismo el futuro del mercado de valores en nuestro país.
+
+
+
+
+*La información en la que esta basada este informe se encuentra en los Reportes del Sistema Financiero, publicado anualmente por el Banco Central del Uruguay. Las demás variables, se extraen de diversas fuentes, cada uno de los gráficos posee el lugar donde se extrajeron los datos.*
