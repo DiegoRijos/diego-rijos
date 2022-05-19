@@ -1,55 +1,206 @@
 ---
-title: "Uruguay y ESG: oportunidades para la gestión activa de la deuda soberana"
-excerpt: "Uruguay tiene una posición de privilegio en los mercados internacionales debido a su buena performance ESG. Esto abre la puerta para la capitalización de esta ventaja en el manejo activo de la deuda soberana. En la siguiente nota, explico un poco más sobre los fundamentos que hacen que Uruguay este bien posicionado, al igual que una explicación breve de los instrumentos a los que podría acceder la República para explotar estas ventajas."
-date: 2022-05-12
-
-show_post_time: false
-
+title: "Mercado de Valores en Uruguay"
+subtitle: "Análisis de la última década"
+excerpt: "Con el resurgimiento de la Comisión de Promoción del Mercado de Valores, se ha vuelto a poner en la mesa la importancia para el país de tener un mercado de valores fuerte y dinámico, que permita a los distintos agentes de la economía, financiarse por medio de la emisión de títulos. El objetivo del presente artículo es analizar el comportamiento del mercado de valores en la última década, haciendo un análisis de algunas variables que nos permitan generar algunos insights relevantes sobre lo que ha sucedido la pasada década."
+date: 2021-07-27
 author: "Diego Rijos"
-location: "Montevideo, Uruguay"
 draft: false
+# layout options: single, single-sidebar
 layout: single
 categories:
-  - El Observador
-  - Academia Nacional de Economía
-  - ESG
-  - Finanzas Sostenibles
-  - Mercado de Valores
-tags:
-  - Finanzas Sostenibles
-  - Gestión de Deuda
-  - ESG
+- R
+- Finanzas
+- Mercado de Valores
+---
+```{r setup, include=FALSE}
+library(tidyverse)
+library(readxl)
+library(readr)
+library(openxlsx)
+library(xts)
+library(plotly)
+library(RColorBrewer)
+library(knitr)
+library(ggplot2)
+library(dygraphs)
+library(magrittr)
+year_inicio <- 2010
+year_final <- 2020
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+excel_sheets("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx")
+Operativa<- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "Operativa")
+Mercado_primario<- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "Mercado_primario")
+Mercado_secundario <-read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "Mercado_secundario")
+Obl_negociables <-  read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "Obl_negociables")
+```
 
-links:
-- icon: readme
-  icon_pack: fab
-  name: Link a la nota en El Observador
-  url: https://www.elobservador.com.uy/nota/uruguay-y-esg-oportunidades-para-la-gestion-activa-de-la-deuda-soberana-202251119190
+![](images/bolsa-de-valores-1400x410-1.jpg)
+
+## 1. Breve introducción
+
+
+Con el resurgimiento de la Comisión de Promoción del Mercado de Valores, se ha vuelto a poner en la mesa la importancia para el país de tener un mercado de valores fuerte y dinámico, que permita a los distintos agentes de la economía, financiarse por medio de la emisión de títulos. El objetivo del presente artículo es analizar el comportamiento del mercado de valores en la última década, haciendo un análisis de algunas variables que nos permitan generar algunos insights relevantes sobre lo que ha sucedido la pasada década. Para ello, haremos un pequeño repaso de variables macrofinancieras relevantes en la última década, como forma de poner en contexto la operativa del mercado de valores. Luego de esto se analizará el mercado bursátil en Uruguay, y como ha evolucionado en la última década. Finalmente, como forma de darle un cierre al análisis se presentarán las perspectivas futuras y las líneas de trabajo que están llevando adelante la CPMV en conjunto con actores relevantes del sector.
+
+
+## 2. Uruguay: Los últimos 10 años
+
+### 2.1 Perspectiva General
+
+La economía uruguaya en los últimos 10 años ha enfrentado ciertas dificultades en el crecimiento de su economía. Si bien, las tasas de crecimiento han sido positivas en gran parte del período, vemos como el dinamismo de la economía ha ido menguando desde 2010 a la fecha. Un entorno menos favorable para la canasta de exportación de Uruguay en conjunto con menos inversión por parte de los agentes económicos, han tenido como consecuencia un menor dinamismo. 2020 es el primer año del período analizado para el que se observa una tasa de crecimiento de la economía negativa. Este mal desempeño de la economía uruguaya se debe a la crisis económica que ha generado la aparición del COVID-19. Si bien Uruguay no entró en una cuarentena obligatoria, la reducción de la movilidad y de la actividad económica, impactó fuertemente en la economía. Si vemos las previsiones que existen a la fecha por parte del Fondo Monetario Internacional, éstas prevén una recuperación de la economía en 2021, estabilizándose la tasa de crecimiento en el orden del 3%. La [encuesta de expectativas económicas de julio de 2021](https://www.bcu.gub.uy/Estadisticas-e-Indicadores/Encuesta%20de%20Expectativas%20Econmicas/iees06i0721.pdf), muestra un comportamiento similar, por lo que los analistas locales estan esperando un crecimiento muy cercano al previsto por el IMF. De todas maneras, el último [informe trimestral en 2021](https://www.bcu.gub.uy/Estadisticas-e-Indicadores/Cuentas%20Nacionales/Informe%20de%20Cuentas%20Nacionales%20Trimestrales_2021_01.pdf) , ha mostrado signos que la economía no se estaría recuperando tan vigorosamente como se preveía.
+
+```{r PIB crecimiento, echo=FALSE, fig.height=2.5, fig.width=8}
+PIB <- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "PIB")
+PIB$Year <-  as.numeric(PIB$Year)
+dygraphs::dygraph(PIB, 
+                  main = "Tasa de Crecimiento PIB 2010-2024",
+                  xlab="Año",
+                  ylab = "Tasa de Crecimiento")%>%
+              dyOptions(drawGrid = F)%>%dyLegend(width = 700)
+```
+Elaboración propia en base a Banco Mundial, IMF, BCU, Itaú BBA
+
+Si analizamos la composición del PIB por sectores, se puede observar como uno de los sectores de mayor peso en la economía han sido los servicios, seguido por la industria y el comercio.
+
+```{r PIB sectorial, echo=FALSE, fig.height=5, fig.width=8}
+PIB_sec <- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "Pib_sect")
+PIB_sec$Porcentaje <- round(PIB_sec$Porcentaje*100,2)
+a <- ggplot(PIB_sec, aes(x = year, y = Porcentaje, fill = Sector)) + 
+  geom_bar(stat = "identity", color="skyblue")+
+  scale_fill_brewer()+
+  scale_x_continuous(breaks = c(year_inicio:year_final))+
+  scale_y_continuous(breaks = seq(0,100,10))+
+  theme_classic()+
+  theme(legend.position = "left")+
+  labs(title="PIB sectorial 2010-2019", subtitle = "Por bolsa transada y tipo de titulo transado", x="Año", y="Porcentaje PIB" )+
+  coord_flip()
+ggplotly(a)
+```
+Elaboración propia en base a MIEM
+
+El crecimiento no ha sido el único problema que ha tenido que enfrentar en los últimos años la economía uruguaya. La persistencia de una alta tasa de desempleo ha sido un fuerte reflejo por parte del mercado laboral del menor dinamismo por parte de la economía. La situación producida por la pandemia, por su parte, ha empeorado la situación disparando las cifras de desempleo. Por otro lado, la pandemia ha puesto al descubierto un problema endémico de la economía nacional, la informalidad en el mercado laboral.
+
+```{r demempleo, echo=FALSE, fig.height=2.5, fig.width=8}
+Desem <-  read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "Desempleo")
+dygraphs::dygraph(Desem, 
+                  main = "Tasa de desempleo 2010-2020",
+                  xlab="Año",
+                  ylab = "Tasa de Desempleo")%>%
+              dyOptions(drawGrid = F)%>%dyLegend(width = 700)
+```
+Elaboración propia en base a INE
+
+Los efectos de un menor dinamismo en la economía de nuestros vecinos (incluso antes del impacto de la pandemia), ha generado un menor dinamismo en el sector exportador. Desde este punto de vista, si bien el país ha buscado una apertura económica con preferencia arancelaria mediante tratados negociados en conjunto con el Mercosur, estos no se han materializado ni entrado en vigor. Ejemplos claros de esto son los tratados entre Mercosur y la Unión Europea y Mercosur EFTA, que, si bien terminaron las negociaciones y se llegó a un acuerdo, éstos no han sido ratificados ni puestos en vigencia hasta la fecha. Por su parte, siguen en negociación otros tratados entre el bloque y la República de Corea al igual que con Singapur. El actual gobierno, con una óptica más aperturista respecto al comercio exterior, ha estado buscando el aval de sus socios en la flexibilización del bloque comercial para permitir a sus miembros negociar con terceros países a nombre propio. Al momento de escribir estas palabras, no esta muy claro cual va a ser el rumbo que van a tomar dichos esfuerzos.
+
+Por otro lado, el panorama internacional muestra un nuevo boom en el precio de las commodities, producto del aumento en la demanda de estos productos en el mercado mundial. Las causas de este aumento no están del todo claras, ya que no está claro si se debe enteramente a un aumento de la demanda o a un vuelco de la liquidez del mercado financiero global en estos tipos de mercancías. De todas maneras, está puede ser una vía por la cual el país pueda retomar la senda del crecimiento económico en el corto plazo. No obstante, para mantener esta senda en el largo plazo van a ser necesarias reformas de carácter más profundo que necesitarán fuertes consensos entre los distintos actores políticos y sociales del país.
+
+
+```{r commodities, echo=FALSE, fig.height=5, fig.width=8}
+Com <- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "Com")
+Com <- xts(x=Com[,-1], order.by = Com$Fecha)
+dygraphs::dygraph(Com, 
+                  main = "Cotización mensual contratos futuros",
+                  xlab="Año",
+                  ylab = "Precio por contrato")%>%
+              dyOptions(drawGrid = F)%>%dyLegend(width = 700)%>%
+              dyRangeSelector()
+```
+Elaboración propia en base a Investing.com
+
+En materia fiscal, se ha vivenciado un fuerte deterioro en las cuentas fiscales, no pudiéndose cuadrar las cuentas fiscales en la ultima década. El efecto cincuentones mejoró el ratio de déficit fiscal/PIB, pero se ha mantenido en los últimos años en niveles superiores al 5%. El plan de consolidación fiscal propuesto por el gobierno en funciones, ha tenido que ser parcialmente aplazado debido a la aparición de la pandemia de Covid-19. No obstante, es esperable que, de materializarse una mejora en la situación sanitaria y económica, los esfuerzos del gobierno estén alineados con mitigar esta problemática. 
+
+Por otra parte, en términos de política monetaria, existió un cambio desde un esquema de agregados monetarios a la fijación de una tasa de interés de referencia a un día de plazo. Esto, sumado al estrechamiento del rango de inflación, han generado un mayor clima de confianza que ha repercutido en una leve baja en la inflación según el departamento de [Research de BBVA](https://www.elpais.com.uy/economia-y-mercado/seis-meses-instaurada-nueva-politica-monetaria.html) al igual que ha performado correctamente a la hora de extender la política monetaria a la economía real vía LRM.
+
+## 2.2 Principales variables macroeconómicas y financieras
+
+Es conveniente, para proseguir en el análisis, observar la evolución de algunas variables macrofinancieras claves. De esta forma extraer algunos insights sobre la posible repercusión de estas en la dinámica del mercado de valores en Uruguay en años recientes. 
+
+### 2.2.1 Riesgo País
+Una variable clave a la hora de mirar el mercado, es el Riesgo País. El valor de éste repercute fuertemente en la tasa en las que los distintos agentes de la economía pueden endeudarse. En el marco de este análisis, el valor de este indicador repercute en la tasa a la que se emiten los activos financieros en el mercado bursátil, dado que se incorpora conjuntamente con los riesgos propios de los emisores. 
+
+Observando la gráfica siguiente, podremos observar como el máximo de la serie se produjo en marzo de 2020. Este comportamiento se debió principalmente al pánico financiero en los principales mercados desencadenado por la expansión del coronavirus a lo largo del orbe. Este comportamiento ha sido análogo en la mayoría de los países de los mercados emergentes, debido a la mayor incertidumbre en el manejo posible de las consecuencias económicas de la pandemia. Si bien este máximo histórico de 401 puntos básicos se generó en cuestión de días, tuvo una fuerte reversión a la media. Esta reversión en parte fue consecuencia del buen manejo de la situación sanitaria en los meses siguientes al estallido de la pandemia al igual que el enfoque de libertad responsable que amortiguó los efectos provocados por una posible cuarentena obligatoria. 
+
+```{r Riesgo pais, echo=FALSE, fig.height=5, fig.width=8}
+UBI <- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "UBI")
+library(xts)
+UBI <- xts(x = UBI$UBI, order.by = UBI$Fecha)
+colnames(UBI) <- "UBI"
+dygraphs::dygraph(UBI, 
+                  main = "Riesgo País (UBI RAFAP) 2010-2020",
+                  xlab="Año",
+                  ylab = "RAFAP UBI")%>%
+              dyOptions(drawGrid = F)%>%
+              dyRangeSelector()%>%
+              dyEvent("2020-03-13", "Primer caso confirmado de Covid-19", labelLoc = "top")%>%
+              dyLimit(as.numeric(max(UBI$UBI)), color = "red")%>%
+              dyLimit(as.numeric(min(UBI$UBI)), color = "green")
   
-- icon: file-download
-  icon_pack: fas
-  name: Descargar pdf
-  url: https://www.scribd.com/document/574959631/Uruguay-y-ESG-oportunidades-para-la-gestion-activa-de-la-deuda-soberana
-  
-  ---
-  
-  Uruguay y ESG: Oportunidades para la gestión activa de la deuda soberana
+```
+Elaboración propia en base a RAFAP
 
-La integración de los factores ESG en las estrategias de inversión ha ido en aumento en los últimos años. Cómo adelantaba en la [columna de diciembre del año pasado] (https://diegorijos.com/talk/2021-12-17-esg-el-futuro-de-las-finanzas/) , la industria financiera está mirando fuertemente estos factores a la hora de seleccionar los instrumentos de inversión para los portafolios. Esto representa una oportunidad única para Uruguay a la hora de planear el manejo de su deuda soberana. 
+La caída en el riesgo país ha permitido a Uruguay salir a emitir deuda durante la pandemia a tasas de interés históricamente bajas. En concreto se logró emitir en junio de 2020 el equivalente a USD 2000 millones, siendo la reapertura del bono en dólares con vencimiento en 2031 y la emisión de un nuevo bono en unidades indexadas con vencimiento en 2040. Ambos tienen una amortización escalonada los últimos 3 años antes de su vencimiento, un esquema ya visto en bonos lanzados por Uruguay anteriormente. Las tasas a las que accedió fueron 3.875% anual en UI y 2.48% anual en dólares. [En mayo de 2021](http://deuda.mef.gub.uy/innovaportal/file/30159/1/comunicado-de-prensa-global-pesos-2031_reapertura-usd-2031_13_05_2021.pdf), el Estado volvió a emitir deuda en el mercado internacional, pero esta vez en moneda nacional nominal por un monto equivalente a USD 1166 millones. Este bono con vencimiento a 10 años, devenga una tasa de 8.25% anual, siendo esta la tasa más baja a la que el país ha accedido al financiamiento en moneda nacional. Parte de este apetito por bonos nominados en pesos corrientes se debe a una previsión en la fortaleza de la moneda local frente a la divisa estadounidense, esperándose una apreciación en los próximos años. La transacción se completó con la reapertura del bono nominado en dólares con vencimiento 2031.
 
-Podemos definir al ESG soberano como la interacción de las variables ambientales, sociales y de gobernanza que afectan la performance económica de un país. Esto es como afecta variables tales como la corrupción, el imperio de la ley, la protección ambiental y la desigualdad entre otros indicadores en el devenir económico de una economía. Cuanto más fuerte sean estos fundamentos, mejor preparada esta la economía para poder tener una mayor resiliencia ante shocks adversos.
 
-Si analizamos la performance de Uruguay en los principales indicadores de ESG soberanos, encontramos que el país se encuentra dentro de los países mejor puntuados. Esto no nos debería asombrar, Uruguay posee una fuerte tradición de institucionalidad y estabilidad política, lo que influye en el mantenimiento de políticas de Estado en el tiempo. Esta fortaleza en gobernanza, también se ve reflejada en el pilar Social. Políticas de Estado de largo aliento que han impactado en la demografía, la libertad política y social, derechos humanos entre otros factores, lo que nos pone a la vanguardia en dicho pilar.  Desde el punto de vista ambiental, el país destaca en su transición energética hacia una matriz de energía renovable y su protección de biomas. Además de esto, la adhesión a los Objetivos del Desarrollo Sostenible y los Acuerdos de París posicionan a Uruguay como un país comprometido en la materia.
+### 2.2.2 Calificación de riesgo
 
-Esta performance del Estado uruguayo, ha permitido al país destacarse en los mercados internacionales respecto a sus pares. Analizando el Emerging Markets Bond Index (EMBI) realizado por JP Morgan, Uruguay representa aproximadamente el 2,5% de dicho índice. Una vez que éste es ajustado por la performance ESG del país, la ponderación en el índice se ubica aproximadamente en el entorno del 5%. Esto significa que, si los inversores se plegasen a este índice a la hora de elegir sus estrategias de inversión, deberían invertir el doble de lo que hoy hacen en instrumentos financieros emitidos por el Estado uruguayo. Esto repercute en un aumento en la base inversora de los bonos, al igual que un mayor atractivo para los fondos que se especializan en la inversión de activos con alto impacto ESG en la integración de dichos bonos en sus portafolios.
+Si analizamos como ha sido la evolución de la calificación de riesgo para la economía uruguaya podemos observar cómo desde 2005, luego de la crisis económica de 2002 donde los títulos de deuda estuvieron al borde de entrar en categoría de default, esta ha mejorado sustancialmente. Pasada la crisis, se comenzó a recuperar la confianza de los inversores y las calificadoras tomaron nota de ello. Ese aumento en la confianza, repercutió en una mejora de la calificación de riesgo, lográndose el grado inversor en 2012. Los problemas en el crecimiento, la alta relación del stock de deuda vs PIB, el deterioro de las cuentas fiscales ha minado la estabilidad del grado inversor, encendiendo algunas luces de alarma en las calificadoras de riesgo. No obstante, a pesar de estas razones las calificadoras han mantenido la confianza en la capacidad de pago de la economía. 
 
-Por su parte, las calificadoras de riesgo también están empezando a introducir los pilares E y S de su análisis. Esto implica que además de los factores tradicionales de Gobernanza, empiezan a pesar la estabilidad social y los riesgos asociados al cambio climático en la calificación de riesgo. Esto trae aparejado para el Estado la necesidad de cuidar no sólo las variables usuales como déficit fiscal, crecimiento e inflación, sino empezar a interiorizar estas nuevas dimensiones. 
+ 
 
-Este nuevo entorno y exigencias de inversión pone en relevancia cambios en la gestión de la deuda soberana de los países. En este sentido, Boitreaud et. al. (2020) en un trabajo para el Banco Mundial publicaron una guía para las oficinas de gestión de deuda, dando consejos y directivas para desenvolver su labor en este nuevo entorno. Dentro de las principales recomendaciones para la gestión de deuda la integración de aspectos ESG en la emisión de instrumentos ha sido una de las más destacadas. Sobre este punto, en lo que no hay consenso es en la forma en la cual proceder con esta integración. Una aproximación es emitir bonos tradicionales, demostrando al mercado mediante los roadshows y la publicación de información periódica sobre la performance ESG del país. Esta estrategia tiene la ventaja de ser escalable, aunque en contrapartida es menos efectiva a la hora de obtener tasas más bajas. Otra aproximación es la emisión de deuda para realizar proyectos que mejoren alguno de los Objetivos del Desarrollo Sostenible, siendo los fondos recibidos únicamente usados para llevar a cabo dicho proyecto. Esta aproximación tiene mayor impacto en las tasas, pero en contrapartida es poco escalable. Una tercera vía, es la emisión de instrumentos híbridos que tomen lo mejor de las precedentes aproximaciones.
+```{r calificación, echo=FALSE , fig.height=5, fig.width=8}
+GI <- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "GI")
+GI_2 <- xts(x = GI[,c(-1,-5,-6)], order.by = GI$Fecha)
+GI_2$`S&P` <- factor(GI_2$`S&P`, levels=c("B3/B-","B2/B","B1/B+","Ba3/BB-","Ba2/BB","Ba1 /BB+","Baa3/BBB-","Baa2/BBB","Baa1/BBB+","A3/A-","A2/A" ))
+GI_2$`Moody's` <- factor(GI_2$`Moody's` , levels=c("B3/B-","B2/B","B1/B+","Ba3/BB-","Ba2/BB","Ba1 /BB+","Baa3/BBB-","Baa2/BBB"))
+GI_2$`Fitch Ratings` <- factor(GI_2$`Fitch Ratings` , levels=c("B3/B-","B2/B","B1/B+","Ba3/BB-","Ba2/BB","Ba1 /BB+","Baa3/BBB-","Baa2/BBB"))
+dygraphs::dygraph(GI_2, 
+                  main="Calificación crediticia Uruguay",
+                  x="Año",
+                  y="Calificación")%>% dyOptions(drawGrid = F)%>%dyLegend(width = 700)%>%
+              dyLimit(as.numeric(7), color = "red", label = "Grado Inversor")
+```
+```{r cuadro, echo=FALSE}
+a <- c("B3/B-","B2/B","B1/B+","Ba3/BB-","Ba2/BB","Ba1 /BB+","Baa3/BBB-","Baa2/BBB")
+b <- c(1,2,3,4,5,6,7,8)
+c <- rbind(b,a)
+rownames(c) <- c("Código", "Calificación")
+kable(c)
+```
 
-Estos instrumentos híbridos, llamados Sustainability-Linked Bonds, son bonos que tienen como covenants la concreción de ciertas metas de sostenibilidad. La lógica detrás del bono, se puede resumir como el cambio de las condiciones financieras o de estructura del bono, en el caso que se incumpla con la meta impuesta.  Esto implica que existe un proceso de calibración y verificación de la meta realizada por terceros, de forma de mantener una opinión independiente. El cambio de condiciones comúnmente es un cambio en la tasa de interés del bono, comenzando con una tasa base y de no lograrse el objetivo se le agrega una prima por encima, encareciéndose de esta manera el servicio de deuda. 
+Elaboración propia en base a calificadoras
 
-En este sentido, según trascendidos de prensa y comunicaciones por parte de la Unidad de Gestión de Deuda del MEF, se está planeando emitir en los próximos meses un bono de éstas características. Según la Presentación a Inversores de febrero de 2022, este tomará como objetivo las reducciones en la emisión de gases de efecto invernadero pactadas por Uruguay en los Acuerdos de París. De esta forma, el país buscará comenzar a incluir en su manejo de deuda la introducción de conceptos ESG, capitalizando las ventajas comparativas que el país ostenta. Esto representa una oportunidad única de posicionar al país como uno de los pioneros en la implementación de este tipo de bonos, utilizados frecuentemente en el sector corporativo, pero no el soberano. Por otra parte, sirve como señalización al mercado del compromiso que tiene la República en la lucha contra el cambio climático. 
+Dentro de los puntos fuertes que han observado las calificadoras, se encuentra la estabilidad institucional que el país tiene. Desde el respeto a la propiedad privada a la capacidad del sistema político de sentarse a dialogar para llevar adelante reformas estructurales, la confianza en la estabilidad ha sido una constante en Uruguay históricamente. Esta permite que, a largo plazo, sea menos riesgoso financiar e invertir en el país. Por otro lado, la voluntad del gobierno actual para cuadrar las cuentas fiscales en un horizonte cercano ha inclinado la balanza de las calificadoras para mantener la calificación dentro del grado inversor. Otra fortaleza vista por las agencias calificadoras, ha sido el nivel de reservas del BCU, que brinda estabilidad al sistema financiero. Como se adelantaba antes, los problemas que ha enfrentado la economía en los últimos años han sido los principales factores que las calificadoras han observado para poner en tela de duda la calificación actual. 
 
-Boitreaud , S., Gratcheva, E. M., Gurhy, B., Paladines, C., & Skarnulis, A. (2020). Riding the Wave: Navigating the ESG Landscape for Sovereign Debt Managers. Washington DC: World Bank Group.
+La calificación otorgada por FitchRatings fue BBB- con perspectiva negativa, Moody’s Baa2 con perspectiva estable y por último S&P Global Ratings. Los dictámenes se pueden encontrar siguiendo los siguientes códigos QR, al igual que una nota ampliando la importancia de mantener el grado inversor y las consecuencias de su pérdida.
+
+
+![](images/Calif.jpg)
+
+### 2.2.3 Inflación
+
+Otra variable clave a la hora de analizar la coyuntura económica del país es observar la evolución de la inflación. Hay que resaltar que la inflación en Uruguay luego de la crisis de 2002, se ha mantenido en términos generales en niveles inferiores a las dos cifras. Si uno lo analiza con una perspectiva histórica, esta inflación se encuentra en los niveles históricos más bajos de las ultimas décadas. No obstante, en términos comparativos, Uruguay tiene una inflación alta en comparación con el mundo. Para ejemplificar, en la región, Uruguay es el tercer país con la mayor inflación, solo superado por Venezuela y Argentina. 
+
+Si vemos la alineación de las cifras de inflación respecto a los objetivos de inflación impuestos por el Banco Central, encontramos que en dos ocasiones entro dentro del rango meta. Durante 2010 y de marzo de 2017 a abril del 2018, la inflación acumulada en los previos 12 meses entró dentro de los límites propuestos por el BCU.  En 2020, concretamente los meses posteriores a marzo, se observó un escalamiento en la tasa de inflación debido a la pandemia, una causa probable de esto fue el pass-through entre el tipo de cambio y la inflación.
+
+```{r Inflacion, echo=FALSE, fig.height=5, fig.width=8}
+Infl <- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "Inflacion")
+Infl_2 <- xts(x = Infl[,-1], order.by = Infl$Fecha)
+dygraphs::dygraph(Infl_2, 
+                  main = "Inflación 2010-2020",
+                  xlab="Año",
+                  ylab = "Tasa de Inflación")%>%
+              dyOptions(drawGrid = F)%>%
+              dyRangeSelector()%>%dyLegend(width = 700)
+```
+Elaboración propia en base a INE, BCU, IMF, Itaú BBA
+
+No obstante, hemos visto una retracción de la inflación, con una tendencia a que ésta entre dentro del rango meta en los próximos años. Observando el gráfico, se puede ver como tanto el IMF, los principales actores del mercado y la academia al igual que bancos de inversión extranjeros esperan que en un período menor a los dos años la inflación entre dentro del rango meta.
+
+
+### 2.2.4 Tipo de cambio USD/UYU
+
+En una economía bimonetaria como la uruguaya, una variable a analizar siempre es la cotización del par USD/UYU. El dólar en Uruguay ha sido históricamente el refugio de los individuos frente a la incertidumbre que generaban los procesos inflacionarios y las crisis económicas. Desde el punto de vista comportamental, a pesar de que en la mayoría de los casos mantener dólares no es la opción más conveniente, las personas tienen anclado en sus mentes que el dólar es un buen activo para protegerse de los eventos catastróficos. Esto también repercute en la fijación de precios de la economía uruguaya, donde los bienes de capital y ciertos bienes de consumo están denominados en dólares. Por esta razón, encontramos un fuerte pass-through entre el tipo de cambio y la inflación.
+
+Por su parte, a la hora de obtener financiamiento, muchas empresas históricamente han tenido que optar por la financiación en dólares. Esto implicaba que el riesgo asociado al descalce de moneda, fuera significativo para las empresas, pudiendo éstas pasar por una mala situación financiera ante bruscos cambios del par. La no existencia de ciertos instrumentos de cobertura para este riesgo ni de un mercado donde poder descargarlo ha sido una de las trabas para controlar este riesgo por parte de las firmas. 
+
+Analizando la evolución de los últimos 10 años de esta variable, podemos ver ciertos ciclos donde el tipo de cambio se ha movido con patrones claros. Si observamos el gráfico siguiente, podemos ver como desde mediados de 2010 a mediados de 2013 el tipo de cambio se mantuvo estable dentro de un rango cercano a los 20 pesos por dólar. Durante este período podemos observar el mínimo de la serie histórica, que comprenden estos últimos 10 años, registrado en junio de 2011 donde la par se situó en 18,311 pesos por dólar.
 
