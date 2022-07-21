@@ -1,0 +1,161 @@
+---
+title: Monitor ESG
+author: Diego Rijos
+date: '2022-07-21'
+slug: []
+categories:
+  - ESG
+  - Tesis de Maestría
+  - ESG Soberano
+tags:
+  - ESG
+  - Finanzas
+  - Finanzas Sostenibles
+subtitle: ''
+excerpt: ''
+series: ~
+layout: single
+links:
+  icon: door-open
+  icon_pack: fas
+  name: website
+  url: /
+---
+---
+title: "Monitor ESG Soberano"
+output: 
+  flexdashboard::flex_dashboard:
+    logo: 
+    orientation: row
+    vertical_layout: fill
+        
+
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+library(readxl)
+
+library(ggplot2)
+library(plotly)
+library(countrycode)
+library(ggmap)
+
+```
+Indice Sesgado {data-icon="fa-signal"}
+===================================== 
+
+    ```{r}
+
+library(readr)
+panel_scatter <- read_csv("C:/Users/Usuario/Documents/diego-rijos/ESG_index/panel_scatter.csv")
+
+Country_code <- read_excel("C:/Users/Usuario/Desktop/Bases de datos/Country_code - copia.xlsx")
+CC <- Country_code[c(1,3)]
+colnames(CC) <- c("Country", "ISO")
+#as.data.frame(unique(CC$ISO))
+#a <- CC %>% group_by(ISO) %>%filter(n()<=1)
+
+panel_scatter <- left_join(panel_scatter, CC, by="ISO")
+
+
+
+```
+Column 1
+--------------------------------------------------
+
+### 
+
+```{r}
+plot_ly(panel_scatter, type='choropleth', locations=panel_scatter$ISO, text=panel_scatter$Country, frame = panel_scatter$Year)%>%add_trace(z=panel_scatter$ESG,colorscale="Greens",
+    zmin=min(panel_scatter$ESG)-10, zmax=100, reversescale = T)%>%layout(title = 'Indice ESG')
+
+```
+
+
+Indice Sesgado (cont) {data-icon="fa-signal"}
+===================================== 
+
+### 
+
+```{r}
+
+panel_scatter %>% 
+  plot_ly(
+    x = ~LN_PIBPPPPC,
+    y = ~ESG,
+    color = ~Tipo,
+    frame = panel_scatter$Year,
+    alpha = 0.8,
+    text=panel_scatter$Country
+    
+  )%>%layout(title="Relación Índice ESG - Ingreso país",yaxis=list(title="Indice ESG"),xaxis = list (title="PIB PPP per cápita (ln)", legend = list(title="Grupo de Ingreso")))
+```
+
+### 
+
+```{r}
+
+panel_scatter %>% 
+  plot_ly(
+    x =~ISO,
+    y = ~ESG,
+    color = ~Tipo,
+    frame = panel_scatter$Year,
+    alpha = 0.5,
+    text=panel_scatter$Country
+    
+  )%>%layout(title="Ranking",yaxis=list(title="Indice ESG"),xaxis = list(categoryorder = "total ascending", title="Paises", legend = list(title="Grupo de Ingreso")))
+```
+
+Indice Insesgado {data-icon="fa-signal"}
+===================================== 
+
+
+Column 1
+--------------------------------------------------
+
+###
+
+```{r}
+plot_ly(panel_scatter, type='choropleth', locations=panel_scatter$ISO, text=panel_scatter$Country, frame = panel_scatter$Year)%>%add_trace(z=panel_scatter$ESG_unb,colorscale="Greens",
+    zmin=min(panel_scatter$ESG_unb)-10, zmax=100, reversescale = T)%>%layout(title = 'Indice ESG Insesgado')
+
+```
+
+
+Indice Insesgado (cont) {data-icon="fa-signal"}
+===================================== 
+
+### 
+
+```{r}
+
+panel_scatter %>% 
+  plot_ly(
+    x = ~LN_PIBPPPPC,
+    y = ~ESG_unb,
+    color = ~Tipo,
+    frame = panel_scatter$Year,
+    alpha = 0.8,
+    text=panel_scatter$Country
+    
+  )%>%layout(title="Relación Índice ESG Insesgado - Ingreso país",yaxis=list(title="Indice ESG Insesgado"),xaxis = list (title="PIB PPP per cápita (ln)", legend = list(title="Grupo de Ingreso")))
+```
+
+### 
+
+```{r}
+
+panel_scatter %>% 
+  plot_ly(
+    x =~ISO,
+    y = ~ESG_unb,
+    color = ~Tipo,
+    frame = panel_scatter$Year,
+    alpha = 0.5,
+    text=panel_scatter$Country
+    
+  )%>%layout(title="Ranking",yaxis=list(title="Indice ESG insesgado"),xaxis = list(categoryorder = "total ascending", title="Paises", legend = list(title="Grupo de Ingreso")))
+```
