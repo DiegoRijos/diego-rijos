@@ -20,9 +20,7 @@ links:
   icon_pack: fas
   name: website
   url: /
----
----
-title: "Monitor ESG Soberano"
+
 output: 
   flexdashboard::flex_dashboard:
     logo: 
