@@ -1,6 +1,6 @@
 ---
 title: "Uruguay Y Esg Oportunidades Para La Gestión Activa De La Deuda Soberana"
-excerpt: "Uruguay esta posicionado como un país con alto nivel de ESG en los rankings de los países, esto presenta una oportunidad única para el país de posicionarse como emisor de renta variable sostenible. En la siguiente columna analizo la oportunidad que esto presenta a la hora de gestionar la deuda soberana del país"
+excerpt: "Uruguay esta posicionado como un país con alto nivel de ESG en los rankings de los países, esto presenta una oportunidad única para el país de posicionarse como emisor de renta variable sostenible. En la siguiente columna analizo la oportunidad que esto presenta a la hora de gestionar la deuda soberana del país."
 date: 2022-05-12
 
 show_post_time: false
