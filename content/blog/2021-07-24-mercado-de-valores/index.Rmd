@@ -204,3 +204,60 @@ Por su parte, a la hora de obtener financiamiento, muchas empresas históricamen
 
 Analizando la evolución de los últimos 10 años de esta variable, podemos ver ciertos ciclos donde el tipo de cambio se ha movido con patrones claros. Si observamos el gráfico siguiente, podemos ver como desde mediados de 2010 a mediados de 2013 el tipo de cambio se mantuvo estable dentro de un rango cercano a los 20 pesos por dólar. Durante este período podemos observar el mínimo de la serie histórica, que comprenden estos últimos 10 años, registrado en junio de 2011 donde la par se situó en 18,311 pesos por dólar.
 
+```{r Dolar, echo=FALSE, fig.height=5, fig.width=8}
+USD <- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "USD")
+USD <- USD[,-1]
+USD_2 <- xts(x=USD[,-1], order.by = USD$Fecha)
+dygraphs::dygraph(USD_2, 
+                  main = "Cotización USD/UYU Billete 2010-2020",
+                  xlab="Año",
+                  ylab = "USD/UYU")%>%
+              dyOptions(drawGrid = F)%>%
+              dyEvent("2020-03-13", "Primer caso confirmado de Covid-19", labelLoc = "bottom")%>%
+              dyRangeSelector()%>%
+              dyLimit(as.numeric(max(USD_2$`Cotización USD Billete`)), color = "red")%>%
+              dyLimit(as.numeric(min(USD_2$`Cotización USD Billete`)), color = "green")%>%dyLegend(width = 700)
+```
+Elaboración porpia en base a BCU
+
+El segundo ciclo se puede observar desde mediados de 2013 hasta mediados de 2016, donde la economía paso por una larga depreciación del peso uruguayo. Esta depreciación esta ligada al aumento en los mercados internacionales del calor de la moneda norteamericana. El comportamiento del tipo de cambio para ese periodo tiene una fuerte correlación con el comportamiento del DXY para ese periodo, por lo que este comportamiento no fue un caso aislado en el mundo.
+
+El tercer ciclo, se caracteriza por una vuelta al estancamiento del tipo de cambio en un entorno cercano a los 28 pesos por dólar. Luego de este ciclo, comienza una nueva depreciación de la moneda nacional, cuya principal causa fue una política monetaria mas restrictiva por parte de la reserva federal, aumentando paulatinamente la tasa de referencia. Por su parte, también en el entrono regional hubo presiones al alza del tipo de cambio producto de la inestabilidad institucional de Brasil y los problemas político-económicos de la Argentina. 
+
+El último ciclo que se observa es la repercusión en la moneda local del surgimiento del Covid-19, si se aprecia en el gráfico, los días previos al surgimiento del primer caso confirmado de coronavirus, el tipo de cambio tuvo una depreciación exponencial. Este comportamiento se debió al tumulto generado por la pandemia que hizo depreciar las monedas de los países emergentes al procesarse un flight to quality. En esta situación hizo que el par USD/UYU experimentara su máximo histórico, situándose en 45.942 pesos por dólar.  Luego de este overshooting, la moneda estadounidense ha descendido hasta volverse a estancar en el entorno de los 43 pesos por dólar. 
+
+Tomando en cuenta las expectativas del mercado, podemos apreciar que las previsiones de los agentes tienden a que haya una pequeña depreciación. Si analizamos la última [encuesta de expectativas económicas]( https://www.bcu.gub.uy/Estadisticas-e-Indicadores/Encuesta%20de%20Expectativas%20Econmicas/iees06i0721.pdf), se espera que el tipo de cambio para diciembre de 2021 sea de 44.45 pesos por dólar, para diciembre de 2022 46.54 y para diciembre de 2023 49.28 pesos por dólar. Si vemos las previsiones de [Itaú BBA]( https://www.itau.com.br/_arquivosestaticos/itauBBA/contents/common/docs/Escenario_Macro_-_URU_0621.pdf) se espera que para finales de 2021 la par cotice a 44.50 pesos por dólar y a finales de 2022 este a 46.25 pesos por dólar. No obstante, la emisión en pesos realizada en junio de 2021, por su parte nos muestra expectativas a la apreciación del tipo de cambio. Una mejora en los precios internacionales, al igual que una posible recuperación económica rápida son posibles drivers para que se materialice un escenario de apreciacion del peso uruguayo.
+
+
+### 2.2.5 UI/UYU y UP/UYU
+La introducción de la unidad indexada a mediados de la década de los 2000, marco un hito en la posibilidad para las empresas de poder financiarse en una unidad de cuenta que tuviera un mejor calce con sus ingresos. Esta unidad de cuenta, permite cubrir la perdida de poder de compra como consecuencia de la inflación mediante los ajustes diarios planteados por la [metodología utilizada](https://www.ine.gub.uy/web/guest/ipc-indice-de-precios-del-consumo/-/asset_publisher/ddWrDpxj9ogb/content/metodologia-de-la-unidad-indexada-ui-/maximized?_101_INSTANCE_ddWrDpxj9ogb_redirect=%2Fweb%2Fguest%2Fipc-indice-de-precios-del-consumo). Como se puede observar en la gráfica el comportamiento durante el período fue prácticamente lineal. 
+
+```{r UI, echo=FALSE, fig.height=2.5, fig.width=8}
+UI <- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "UI")
+UI <- UI[,-1]
+UI_2 <- xts(x=UI[,-1], order.by = UI$Fecha)
+dygraphs::dygraph(UI_2, 
+                  main = "Cotización Unidad Indexada 2010-2020",
+                  xlab="Año",
+                  ylab = "UI/UYU")%>%
+              dyOptions(drawGrid = F)%>%dyLegend(width = 700)
+
+```
+Elaboración propia en base a INE
+
+Por otra parte, se creo una nueva unidad de cuenta llamada Unidad Previsional, que en su [metodología](https://www.ine.gub.uy/unidad-previsional ) de ajuste sigue el Índice Medio de Salarios Nominales. Si analizamos el siguiente gráfico podemos ver que desde su introducción a la fecha ha seguido una tendencia lineal con algunos saltos, que corresponden a la variación del IMSN.
+
+```{r Up, echo=FALSE, fig.height=2.5, fig.width=8}
+UP <- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "UP")
+UP <- UP[,-1]
+UP_2 <- xts(x=UP[,-1], order.by = UP$Fecha)
+dygraphs::dygraph(UP_2, 
+                  main = "Cotización Unidad Previsional 2010-2020",
+                  xlab="Año",
+                  ylab = "UP/UYU")%>%
+              dyOptions(drawGrid = F)%>%dyLegend(width = 700)
+
+
+
+```
+Elaboración propia en base a INE
