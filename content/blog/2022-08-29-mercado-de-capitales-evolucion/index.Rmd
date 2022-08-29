@@ -1,0 +1,63 @@
+---
+title: "Mercado de Valores en Uruguay"
+subtitle: "Análisis de la última década"
+excerpt: "Con el resurgimiento de la Comisión de Promoción del Mercado de Valores, se ha vuelto a poner en la mesa la importancia para el país de tener un mercado de valores fuerte y dinámico, que permita a los distintos agentes de la economía, financiarse por medio de la emisión de títulos. El objetivo del presente artículo es analizar el comportamiento del mercado de valores en la última década, haciendo un análisis de algunas variables que nos permitan generar algunos insights relevantes sobre lo que ha sucedido la pasada década."
+date: 2022-07-27
+author: "Diego Rijos"
+draft: false
+# layout options: single, single-sidebar
+layout: single
+categories:
+- R
+- Finanzas
+- Mercado de Valores
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(readxl)
+library(readr)
+library(openxlsx)
+library(xts)
+library(plotly)
+library(RColorBrewer)
+library(knitr)
+library(ggplot2)
+library(dygraphs)
+library(magrittr)
+year_inicio <- 2010
+year_final <- 2020
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+excel_sheets("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx")
+Operativa<- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "Operativa")
+Mercado_primario<- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "Mercado_primario")
+Mercado_secundario <-read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "Mercado_secundario")
+Obl_negociables <-  read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "Obl_negociables")
+```
+
+## 1. Breve introducción
+
+
+Con el resurgimiento de la Comisión de Promoción del Mercado de Valores, se ha vuelto a poner en la mesa la importancia para el país de tener un mercado de valores fuerte y dinámico, que permita a los distintos agentes de la economía, financiarse por medio de la emisión de títulos. El objetivo del presente artículo es analizar el comportamiento del mercado de valores en la última década, haciendo un análisis de algunas variables que nos permitan generar algunos insights relevantes sobre lo que ha sucedido la pasada década. Para ello, haremos un pequeño repaso de variables macrofinancieras relevantes en la última década, como forma de poner en contexto la operativa del mercado de valores. Luego de esto se analizará el mercado bursátil en Uruguay, y como ha evolucionado en la última década. Finalmente, como forma de darle un cierre al análisis se presentarán las perspectivas futuras y las líneas de trabajo que están llevando adelante la CPMV en conjunto con actores relevantes del sector.
+
+
+## 2. Uruguay: Los últimos 10 años
+
+### 2.1 Perspectiva General
+
+La economía uruguaya en los últimos 10 años ha enfrentado ciertas dificultades en el crecimiento de su economía. Si bien, las tasas de crecimiento han sido positivas en gran parte del período, vemos como el dinamismo de la economía ha ido menguando desde 2010 a la fecha. Un entorno menos favorable para la canasta de exportación de Uruguay en conjunto con menos inversión por parte de los agentes económicos, han tenido como consecuencia un menor dinamismo. 2020 es el primer año del período analizado para el que se observa una tasa de crecimiento de la economía negativa. Este mal desempeño de la economía uruguaya se debe a la crisis económica que ha generado la aparición del COVID-19. Si bien Uruguay no entró en una cuarentena obligatoria, la reducción de la movilidad y de la actividad económica, impactó fuertemente en la economía. Si vemos las previsiones que existen a la fecha por parte del Fondo Monetario Internacional, éstas prevén una recuperación de la economía en 2021, estabilizándose la tasa de crecimiento en el orden del 3%. La [encuesta de expectativas económicas de julio de 2021](https://www.bcu.gub.uy/Estadisticas-e-Indicadores/Encuesta%20de%20Expectativas%20Econmicas/iees06i0721.pdf), muestra un comportamiento similar, por lo que los analistas locales estan esperando un crecimiento muy cercano al previsto por el IMF. De todas maneras, el último [informe trimestral en 2021](https://www.bcu.gub.uy/Estadisticas-e-Indicadores/Cuentas%20Nacionales/Informe%20de%20Cuentas%20Nacionales%20Trimestrales_2021_01.pdf) , ha mostrado signos que la economía no se estaría recuperando tan vigorosamente como se preveía.
+
+```{r PIB crecimiento, echo=FALSE, fig.height=2.5, fig.width=8}
+PIB <- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "PIB")
+PIB$Year <-  as.numeric(PIB$Year)
+dygraphs::dygraph(PIB, 
+                  main = "Tasa de Crecimiento PIB 2010-2024",
+                  xlab="Año",
+                  ylab = "Tasa de Crecimiento")%>%
+  dyOptions(drawGrid = F)%>%dyLegend(width = 700)
+```
+Elaboración propia en base a Banco Mundial, IMF, BCU, Itaú BBA
+
+Si analizamos la composición del PIB por sectores, se puede observar como uno de los sectores de mayor peso en la economía han sido los servicios, seguido por la industria y el comercio.
+
+
