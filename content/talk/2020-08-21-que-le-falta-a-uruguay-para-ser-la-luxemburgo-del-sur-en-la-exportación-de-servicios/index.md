@@ -1,23 +1,20 @@
 ---
-title: "¿Qué le falta a Uruguay para ser la Luxemburgo del Sur en la exportación de servicios?"
-excerpt: " "
-date: 2020-08-21
-
-show_post_time: false
-
+title: ¿Qué le falta a Uruguay para ser la Luxemburgo del Sur en la exportación de
+  servicios?
 author: "El País"
-location: "Montevideo, Uruguay"
+date: '2020-08-21'
+show_post_time: false
+excerpt: ' '
+location: Montevideo, Uruguay
 draft: false
-# layout options: single, single-sidebar
 layout: single
 categories:
-  - El País
-  - Academia Nacional de Economía
- 
+- El País
+- Academia Nacional de Economía
 tags:
-  - Finanzas
-  - Comercio Exterior
-  - Comercio de Servicios
+- Finanzas
+- Comercio Exterior
+- Comercio de Servicios
 links:
 - icon: readme
   icon_pack: fab
