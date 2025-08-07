@@ -28,11 +28,11 @@ library(magrittr)
 year_inicio <- 2010
 year_final <- 2020
 knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
-excel_sheets("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx")
-Operativa<- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "Operativa")
-Mercado_primario<- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "Mercado_primario")
-Mercado_secundario <-read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "Mercado_secundario")
-Obl_negociables <-  read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "Obl_negociables")
+excel_sheets("C:/Users/Usuario/Desktop/MC/Analisis_Mercado_capitales.xlsx")
+Operativa<- read_excel("C:/Users/Usuario/Desktop/MC/Analisis_Mercado_capitales.xlsx", sheet = "Operativa")
+Mercado_primario<- read_excel("C:/Users/Usuario/Desktop/MC/Analisis_Mercado_capitales.xlsx", sheet = "Mercado_primario")
+Mercado_secundario <-read_excel("C:/Users/Usuario/Desktop/MC/Analisis_Mercado_capitales.xlsx", sheet = "Mercado_secundario")
+Obl_negociables <-  read_excel("C:/Users/Usuario/Desktop/MC/Analisis_Mercado_capitales.xlsx", sheet = "Obl_negociables")
 ```
 
 ![](images/bolsa-de-valores-1400x410-1.jpg)
@@ -50,7 +50,7 @@ Con el resurgimiento de la Comisión de Promoción del Mercado de Valores, se ha
 La economía uruguaya en los últimos 10 años ha enfrentado ciertas dificultades en el crecimiento de su economía. Si bien, las tasas de crecimiento han sido positivas en gran parte del período, vemos como el dinamismo de la economía ha ido menguando desde 2010 a la fecha. Un entorno menos favorable para la canasta de exportación de Uruguay en conjunto con menos inversión por parte de los agentes económicos, han tenido como consecuencia un menor dinamismo. 2020 es el primer año del período analizado para el que se observa una tasa de crecimiento de la economía negativa. Este mal desempeño de la economía uruguaya se debe a la crisis económica que ha generado la aparición del COVID-19. Si bien Uruguay no entró en una cuarentena obligatoria, la reducción de la movilidad y de la actividad económica, impactó fuertemente en la economía. Si vemos las previsiones que existen a la fecha por parte del Fondo Monetario Internacional, éstas prevén una recuperación de la economía en 2021, estabilizándose la tasa de crecimiento en el orden del 3%. La [encuesta de expectativas económicas de julio de 2021](https://www.bcu.gub.uy/Estadisticas-e-Indicadores/Encuesta%20de%20Expectativas%20Econmicas/iees06i0721.pdf), muestra un comportamiento similar, por lo que los analistas locales estan esperando un crecimiento muy cercano al previsto por el IMF. De todas maneras, el último [informe trimestral en 2021](https://www.bcu.gub.uy/Estadisticas-e-Indicadores/Cuentas%20Nacionales/Informe%20de%20Cuentas%20Nacionales%20Trimestrales_2021_01.pdf) , ha mostrado signos que la economía no se estaría recuperando tan vigorosamente como se preveía.
 
 ```{r PIB crecimiento, echo=FALSE, fig.height=2.5, fig.width=8}
-PIB <- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "PIB")
+PIB <- read_excel("C:/Users/Usuario/Desktop/MC/Analisis_Mercado_capitales.xlsx", sheet = "PIB")
 PIB$Year <-  as.numeric(PIB$Year)
 dygraphs::dygraph(PIB, 
                   main = "Tasa de Crecimiento PIB 2010-2024",
@@ -63,7 +63,7 @@ Elaboración propia en base a Banco Mundial, IMF, BCU, Itaú BBA
 Si analizamos la composición del PIB por sectores, se puede observar como uno de los sectores de mayor peso en la economía han sido los servicios, seguido por la industria y el comercio.
 
 ```{r PIB sectorial, echo=FALSE, fig.height=5, fig.width=8}
-PIB_sec <- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "Pib_sect")
+PIB_sec <- read_excel("C:/Users/Usuario/Desktop/MC/Analisis_Mercado_capitales.xlsx", sheet = "Pib_sect")
 PIB_sec$Porcentaje <- round(PIB_sec$Porcentaje*100,2)
 a <- ggplot(PIB_sec, aes(x = year, y = Porcentaje, fill = Sector)) + 
   geom_bar(stat = "identity", color="skyblue")+
@@ -81,7 +81,7 @@ Elaboración propia en base a MIEM
 El crecimiento no ha sido el único problema que ha tenido que enfrentar en los últimos años la economía uruguaya. La persistencia de una alta tasa de desempleo ha sido un fuerte reflejo por parte del mercado laboral del menor dinamismo por parte de la economía. La situación producida por la pandemia, por su parte, ha empeorado la situación disparando las cifras de desempleo. Por otro lado, la pandemia ha puesto al descubierto un problema endémico de la economía nacional, la informalidad en el mercado laboral.
 
 ```{r demempleo, echo=FALSE, fig.height=2.5, fig.width=8}
-Desem <-  read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "Desempleo")
+Desem <-  read_excel("C:/Users/Usuario/Desktop/MC/Analisis_Mercado_capitales.xlsx", sheet = "Desempleo")
 dygraphs::dygraph(Desem, 
                   main = "Tasa de desempleo 2010-2020",
                   xlab="Año",
@@ -96,7 +96,7 @@ Por otro lado, el panorama internacional muestra un nuevo boom en el precio de l
 
 
 ```{r commodities, echo=FALSE, fig.height=5, fig.width=8}
-Com <- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "Com")
+Com <- read_excel("C:/Users/Usuario/Desktop/MC/Analisis_Mercado_capitales.xlsx", sheet = "Com")
 Com <- xts(x=Com[,-1], order.by = Com$Fecha)
 dygraphs::dygraph(Com, 
                   main = "Cotización mensual contratos futuros",
@@ -121,7 +121,7 @@ Una variable clave a la hora de mirar el mercado, es el Riesgo País. El valor d
 Observando la gráfica siguiente, podremos observar como el máximo de la serie se produjo en marzo de 2020. Este comportamiento se debió principalmente al pánico financiero en los principales mercados desencadenado por la expansión del coronavirus a lo largo del orbe. Este comportamiento ha sido análogo en la mayoría de los países de los mercados emergentes, debido a la mayor incertidumbre en el manejo posible de las consecuencias económicas de la pandemia. Si bien este máximo histórico de 401 puntos básicos se generó en cuestión de días, tuvo una fuerte reversión a la media. Esta reversión en parte fue consecuencia del buen manejo de la situación sanitaria en los meses siguientes al estallido de la pandemia al igual que el enfoque de libertad responsable que amortiguó los efectos provocados por una posible cuarentena obligatoria. 
 
 ```{r Riesgo pais, echo=FALSE, fig.height=5, fig.width=8}
-UBI <- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "UBI")
+UBI <- read_excel("C:/Users/Usuario/Desktop/MC/Analisis_Mercado_capitales.xlsx", sheet = "UBI")
 library(xts)
 UBI <- xts(x = UBI$UBI, order.by = UBI$Fecha)
 colnames(UBI) <- "UBI"
@@ -148,7 +148,7 @@ Si analizamos como ha sido la evolución de la calificación de riesgo para la e
 
 
 ```{r calificación, echo=FALSE , fig.height=5, fig.width=8}
-GI <- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "GI")
+GI <- read_excel("C:/Users/Usuario/Desktop/MC/Analisis_Mercado_capitales.xlsx", sheet = "GI")
 GI_2 <- xts(x = GI[,c(-1,-5,-6)], order.by = GI$Fecha)
 GI_2$`S&P` <- factor(GI_2$`S&P`, levels=c("B3/B-","B2/B","B1/B+","Ba3/BB-","Ba2/BB","Ba1 /BB+","Baa3/BBB-","Baa2/BBB","Baa1/BBB+","A3/A-","A2/A" ))
 GI_2$`Moody's` <- factor(GI_2$`Moody's` , levels=c("B3/B-","B2/B","B1/B+","Ba3/BB-","Ba2/BB","Ba1 /BB+","Baa3/BBB-","Baa2/BBB"))
@@ -183,7 +183,7 @@ Otra variable clave a la hora de analizar la coyuntura económica del país es o
 Si vemos la alineación de las cifras de inflación respecto a los objetivos de inflación impuestos por el Banco Central, encontramos que en dos ocasiones entro dentro del rango meta. Durante 2010 y de marzo de 2017 a abril del 2018, la inflación acumulada en los previos 12 meses entró dentro de los límites propuestos por el BCU.  En 2020, concretamente los meses posteriores a marzo, se observó un escalamiento en la tasa de inflación debido a la pandemia, una causa probable de esto fue el pass-through entre el tipo de cambio y la inflación.
 
 ```{r Inflacion, echo=FALSE, fig.height=5, fig.width=8}
-Infl <- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "Inflacion")
+Infl <- read_excel("C:/Users/Usuario/Desktop/MC/Analisis_Mercado_capitales.xlsx", sheet = "Inflacion")
 Infl_2 <- xts(x = Infl[,-1], order.by = Infl$Fecha)
 dygraphs::dygraph(Infl_2, 
                   main = "Inflación 2010-2020",
@@ -206,7 +206,7 @@ Por su parte, a la hora de obtener financiamiento, muchas empresas históricamen
 Analizando la evolución de los últimos 10 años de esta variable, podemos ver ciertos ciclos donde el tipo de cambio se ha movido con patrones claros. Si observamos el gráfico siguiente, podemos ver como desde mediados de 2010 a mediados de 2013 el tipo de cambio se mantuvo estable dentro de un rango cercano a los 20 pesos por dólar. Durante este período podemos observar el mínimo de la serie histórica, que comprenden estos últimos 10 años, registrado en junio de 2011 donde la par se situó en 18,311 pesos por dólar.
 
 ```{r Dolar, echo=FALSE, fig.height=5, fig.width=8}
-USD <- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "USD")
+USD <- read_excel("C:/Users/Usuario/Desktop/MC/Analisis_Mercado_capitales.xlsx", sheet = "USD")
 USD <- USD[,-1]
 USD_2 <- xts(x=USD[,-1], order.by = USD$Fecha)
 dygraphs::dygraph(USD_2, 
@@ -234,7 +234,7 @@ Tomando en cuenta las expectativas del mercado, podemos apreciar que las previsi
 La introducción de la unidad indexada a mediados de la década de los 2000, marco un hito en la posibilidad para las empresas de poder financiarse en una unidad de cuenta que tuviera un mejor calce con sus ingresos. Esta unidad de cuenta, permite cubrir la perdida de poder de compra como consecuencia de la inflación mediante los ajustes diarios planteados por la [metodología utilizada](https://www.ine.gub.uy/web/guest/ipc-indice-de-precios-del-consumo/-/asset_publisher/ddWrDpxj9ogb/content/metodologia-de-la-unidad-indexada-ui-/maximized?_101_INSTANCE_ddWrDpxj9ogb_redirect=%2Fweb%2Fguest%2Fipc-indice-de-precios-del-consumo). Como se puede observar en la gráfica el comportamiento durante el período fue prácticamente lineal. 
 
 ```{r UI, echo=FALSE, fig.height=2.5, fig.width=8}
-UI <- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "UI")
+UI <- read_excel("C:/Users/Usuario/Desktop/MC/Analisis_Mercado_capitales.xlsx", sheet = "UI")
 UI <- UI[,-1]
 UI_2 <- xts(x=UI[,-1], order.by = UI$Fecha)
 dygraphs::dygraph(UI_2, 
@@ -249,7 +249,7 @@ Elaboración propia en base a INE
 Por otra parte, se creo una nueva unidad de cuenta llamada Unidad Previsional, que en su [metodología](https://www.ine.gub.uy/unidad-previsional ) de ajuste sigue el Índice Medio de Salarios Nominales. Si analizamos el siguiente gráfico podemos ver que desde su introducción a la fecha ha seguido una tendencia lineal con algunos saltos, que corresponden a la variación del IMSN.
 
 ```{r Up, echo=FALSE, fig.height=2.5, fig.width=8}
-UP <- read_excel("C:/Users/Usuario/Desktop/Analisis_Mercado_capitales.xlsx", sheet = "UP")
+UP <- read_excel("C:/Users/Usuario/Desktop/MC/Analisis_Mercado_capitales.xlsx", sheet = "UP")
 UP <- UP[,-1]
 UP_2 <- xts(x=UP[,-1], order.by = UP$Fecha)
 dygraphs::dygraph(UP_2, 
